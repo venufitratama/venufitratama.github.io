@@ -107,7 +107,8 @@ GPA 3.60/4.00 | [Transcript](https://drive.google.com/file/d/1xALLspa37JvIsHPieq
 
 ### Bike Sales Distribution
 
-[![Open Notebook](https://img.shields.io/badge/Google%20Data%20Studio-Dashboard-orange)](https://lookerstudio.google.com/u/0/reporting/543ae17b-f2d6-41af-a0ef-e104240c9fcb/page/Bk55C)
+[![Open Dashboard](https://img.shields.io/badge/Google%20Data%20Studio-Dashboard-orange)](https://lookerstudio.google.com/u/0/reporting/543ae17b-f2d6-41af-a0ef-e104240c9fcb/page/Bk55C)<br>
+[![Open Presentation](https://img.shields.io/badge/Google%20Slides-Presentation-orange)](https://docs.google.com/presentation/d/1uTY36gFnmfg1HgCTbYjTUnUfA-WgTplp/edit?usp=share_link&ouid=102297297446553873586&rtpof=true&sd=true)
 [![View on GitHub](https://img.shields.io/badge/Github-.ipynb-orange)](https://github.com/venufitratama/Bike-Sales-Distribution/blob/master/Bike%20Sales%20Distribution.ipynb)
 
 <div style="text-align: justify">According to this sales data, the records of sales is from 2011 - 2016, with detail of products info, customers info and price and profit per product. Since we need to know which country have most buyers, how much profit the store make and what kind of products category have most sales, i will explore more about this data especially on country, state, sub category products and how much profit do they earn. This data exploration will answer these questions : What is the most product sales in every year? Who is the most segmented gender that buy the product? Where is the most product sold? When is the company have most profit margin? Why did the company should expand or not? and How is the increase or decrease of profit every year?</div>
@@ -118,7 +119,9 @@ GPA 3.60/4.00 | [Transcript](https://drive.google.com/file/d/1xALLspa37JvIsHPieq
 ---
 ### Machine Failure & Credit Card Predictions using Machine Learning
 
-[![View on GitHub1](https://img.shields.io/badge/Github-.ipynb%20(Machine%20Failure)-orange)](https://github.com/venufitratama/Machine-Learning-Prediction/blob/master/Machine%20Failure%20Prediction.ipynb)
+[![Open Presentation1](https://img.shields.io/badge/Google%20Slides%20-Presentation%20(Machine%20Failure)-orange)](https://docs.google.com/presentation/d/1LdOXXjdlF2dYMtwN1gYybLzvjrmSTs7g/edit?usp=share_link&ouid=102297297446553873586&rtpof=true&sd=true)
+[![View on GitHub1](https://img.shields.io/badge/Github-.ipynb%20(Machine%20Failure)-orange)](https://github.com/venufitratama/Machine-Learning-Prediction/blob/master/Machine%20Failure%20Prediction.ipynb)<br>
+[![Open Presentation2](https://img.shields.io/badge/Google%20Slides%20-Presentation%20(Credit%20Card%20Payment)-orange)](https://docs.google.com/presentation/d/11_aVfYqRvZBaWyOR5VzPtvrXegg8-whJ/edit?usp=share_link&ouid=102297297446553873586&rtpof=true&sd=true)
 [![View on GitHub2](https://img.shields.io/badge/Github-.ipynb%20(Credit%20Card%20Payment)-orange)](https://github.com/venufitratama/Machine-Learning-Prediction/blob/master/Credit%20Card%20Payment%20Prediction.ipynb.ipynb)
 
 <div style="text-align: justify">Create a classification model to predict machine failure & default payment next month with the datasets. implementing supervised learning and unsupervised learning, model evaluation, model tuning, and model deployment. Scikit-learn was used as machine learning library. Scikit-learn model used are Logistic Regression, Support Vector Machine, K-Nearest Neighbors, Gaussian Naive Bayes, Random Forest, Adaptive Boost</div>
@@ -129,6 +132,7 @@ GPA 3.60/4.00 | [Transcript](https://drive.google.com/file/d/1xALLspa37JvIsHPieq
 ---
 ### Customer Churn Prediction using Deep Learning
 
+[![Open Presentation](https://img.shields.io/badge/Google%20Slides-Presentation-orange)](https://docs.google.com/presentation/d/1zCqCTOMBUNMXRnuJSCEv7y7KmS0GOPQi/edit?usp=share_link&ouid=102297297446553873586&rtpof=true&sd=true)
 [![View on GitHub1](https://img.shields.io/badge/Github-.ipynb-orange)](https://github.com/venufitratama/Deep-Learning-Prediction/blob/master/Telco%20Customer%20Churn.ipynb)
 
 
@@ -140,6 +144,7 @@ GPA 3.60/4.00 | [Transcript](https://drive.google.com/file/d/1xALLspa37JvIsHPieq
 ---
 ### Image Classification for Healthy and Diseased Leaves using Computer Vision
 
+[![Open Presentation](https://img.shields.io/badge/Google%20Slides-Presentation-orange)](https://docs.google.com/presentation/d/1KdmAy_XmuA2Kbxlv1AHpo-JZinW897BL/edit?usp=share_link&ouid=102297297446553873586&rtpof=true&sd=true)
 [![View on GitHub1](https://img.shields.io/badge/Github-.ipynb-orange)](https://github.com/venufitratama/Computer-Vision-Image-Classification/blob/master/Image%20Classification.ipynb)
 
 
@@ -151,7 +156,7 @@ GPA 3.60/4.00 | [Transcript](https://drive.google.com/file/d/1xALLspa37JvIsHPieq
 ---
 ### Twitter Engagement for Stock Price Analysis using NLP, GRU & LSTM methods
 
-[![Open Notebook](https://img.shields.io/badge/Google%20Slides-Presentation-orange)](https://docs.google.com/presentation/d/1J60g6vI2mNiXlWQUW1nFKf1UNRnY05CdhyMu34dXCJM/edit?usp=sharing)
+[![Open Presentation](https://img.shields.io/badge/Google%20Slides-Presentation-orange)](https://docs.google.com/presentation/d/1J60g6vI2mNiXlWQUW1nFKf1UNRnY05CdhyMu34dXCJM/edit?usp=sharing)
 [![View on GitHub](https://img.shields.io/badge/Github-.ipynb-orange)](https://github.com/venufitratama/TESIA-S-CLASS)
 
 <div style="text-align: justify">On the off chance which stocks do we actually need to purchase? To help answering that question, the model was created, “Twitter Engagement for Stock prIce Analysis - Sentiment CLASSification (TESIA - S Class)” to make it less demanding to decide the stock to be acquired according to time series prediction and twitter sentimental classification.</div>
