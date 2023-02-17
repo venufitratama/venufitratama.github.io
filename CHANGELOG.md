@@ -1,264 +1,1245 @@
-# Changelog
+---
+title: CHANGELOG
+layout: default
+---
 
-## [1.12.0](https://github.com/lxndrblz/anatole/compare/v1.11.0...v1.12.0) (2022-11-26)
+# CHANGELOG
+
+All notable user-facing changes to this project are documented in this file.
+
+{: .highlight }
+The project underwent a major maintenance shift in March 2022.
+
+## HEAD
+
+{: .note }
+This website is built from the `HEAD` of the `main` branch of the theme repository.
+
+{: .warning }
+This website includes docs for some new features that are not available in `v0.4.0`!
+
+Code changes to `main` that are *not* in the latest release:
+
+- Fixed: allow later versions of `bundler` by [@mattxwang] in [#1165]
+
+Docs changes in `main` that are *not* in the latest release:
+
+- Fixed: re-add `jekyll-github-metadata` to docs site by [@mattxwang] in [#1108]
+
+[#1108]: https://github.com/just-the-docs/just-the-docs/pull/1108
+[#1165]: https://github.com/just-the-docs/just-the-docs/pull/1165
+
+## Release v0.4.0
+
+We're so excited to release Just the Docs `v0.4.0`. This release has been almost a year in the making - after our new maintenance team has taken over the project, we've added two years of backlogged features and bugfixes to modernize the theme. This CHANGELOG will summarize some of the key changes, discuss migrations strategies, and outline broad future plans for this theme.
+
+### Brief Overview - Highlighted Changes
+
+`v0.4.0` contains many new features and bugfixes. We enumerate all of them in further sections in this changelog; however, we'd like to call out some of the most-requested changes:
+
+- better support for dark theme: dark highlighting, search input color
+- [callouts](https://just-the-docs.github.io/just-the-docs/docs/ui-components/callouts/), a new design component to highlight content
+- [configuring mermaid.js](https://just-the-docs.github.io/just-the-docs/docs/ui-components/code/#mermaid-diagram-code-blocks), a markdown-native diagram visualization library
+- [copy code button](https://just-the-docs.github.io/just-the-docs/docs/ui-components/code/#copy-button) for code snippets
+- [external navigation links](https://just-the-docs.github.io/just-the-docs/docs/navigation-structure/#external-navigation-links)
+- major improvements to nav generation efficiency and robustness
+- minor improvements to built-in accessibility (SVG icons, nav titles, skip to main content)
+- [modularized site components](https://just-the-docs.github.io/just-the-docs/docs/customization/#custom-layouts-and-includes) (advanced feature)
+- [new custom includes](https://just-the-docs.github.io/just-the-docs/docs/customization/#override-includes): table of contents heading, navigation panel footer, search placeholder, lunr search indices
+- bugfixes involving WEBrick and Ruby 3, Liquid processing in CSS comments, nested task lists, relative URLs, scroll navigation, corrupted search data from rake, breadcrumbs, and more!
+- more documentation for [custom includes](https://just-the-docs.github.io/just-the-docs/docs/customization/#override-includes), this changelog, and the [migration guide](https://just-the-docs.github.io/just-the-docs/MIGRATION/)
+
+*After usage instructions and the roadmap, we enumerate all changes from `v0.3.3`.*
+
+### Using Release `v0.4.0`
+
+Unlike pre-releases, `v0.4.0` is a new semver minor release for the theme. That means that users who have not pinned the theme version will be **automatically upgraded to `v0.4.0` the next time they build their site**.
+
+To use this release explicitly as a remote theme:
+
+```yml
+remote_theme: just-the-docs/just-the-docs@v0.4.0
+```
+
+To use this RC explicitly as a gem-based theme, pin the version in your `Gemfile` and re-run `bundle install` or `bundle update just-the-docs`:
+
+```ruby
+gem "just-the-docs", "0.4.0"
+```
+
+If you would prefer to not upgrade, you can enforce that explicitly:
+
+1. pin your gem version in your `Gemfile`, like so
+```ruby
+gem "just-the-docs", "0.3.3"
+```
+2. freeze the `remote_theme`, like so
+```yml
+remote_theme: just-the-docs/just-the-docs@v0.3.3
+```
+
+### Migration Guide and Strategies
+
+We've developed a new [migration guide](https://just-the-docs.github.io/just-the-docs/MIGRATION/) for users to migrate from version `v0.3.3` to `v0.4.0`. It outlines major changes in project maintenance (e.g. new repository link, team) as well as breaking changes that may break your site (and potential solutions). We suggest that all users refer to the guide before manually upgrading their site.
+
+**For the vast majority of users, we do not anticipate that this will be a breaking change.** The major touch points are surrounding new includes, navigation (ordering, pages, and collections), the favicon, and a shift to relative URLs. However, users who heavily customize the theme (primarily by overriding includes) will likely have to make minor changes.
+
+Given the length of features added in this release, users may want to incrementally upgrade through the pre-releases. To follow this approach, read this changelog from `v0.4.0.rc1` to `v0.4.0.rc5`; this breaks down the release into small chunks, each of which should be easier to upgrade. `v0.4.0.rc5` is identical to this release.
+
+For support with migrating to `v0.4.0`, [open an issue](https://github.com/just-the-docs/just-the-docs/issues) or [start a discussion](https://github.com/just-the-docs/just-the-docs/discussions) and let us know!
+
+### Roadmap (What's Next?)
+
+Moving forward, we plan to release more frequently with smaller, bite-sized changes. This should make it easier for users to upgrade in the future!
+
+Broadly, many features are still on the radar. We anticipate the rest of `v0.4.x` to be bugfixes surrounding this new release.
+
+For version `v0.5`, our roadmap includes:
+
+- a theme toggle (light/dark mode), with automatic theme switching based on browser preferences
+- better GDPR compliance for analytics
+- multi-level/recursive navigation (unlimited hierarchy of child pages)
+
+In future versions, we also plan on:
+
+- adding better dark theme defaults
+- adding better internationalization support
+- exploring offline PDF generation
+- improving accessibility within the theme
+- improving search functionality
+- refactoring and improving the robustness of our codebase
+
+Have ideas for what's next, or want to get involved? [Open an issue](https://github.com/just-the-docs/just-the-docs/issues) or [start a discussion](https://github.com/just-the-docs/just-the-docs/discussions) and let us know! We're looking for more contributors and maintainers to help us develop the theme.
+
+### New Features
+
+- Added: Combination by [@pdmosses] in [#578]
+  - Added: dark highlighting in [#463]
+  - Added: pages and collections in [#448]
+  - Added: callouts in [#466]
+  - Fixed: breadcrumb behaviour … by [@AdityaTiwari2102] in [#477]
+  - Fixed: prevent rake command corrupting search data in [#495] (also listed below)
+  - Fixed: nested lists in [#496]
+  - Fixed: set color for search input in [#498] (also listed below)
+  - Fixed: sites with no child pages (no PR)
+  - Fixed: TOC/breadcrumbs for multiple collections in [#494]
+  - Added: collection configuration option `nav_fold` (no PR)
+  - Fixed: indentation and color for folded collection navigation (no PR)
+  - Fixed: scroll navigation to show the link to the current page in [#639]
+  - Fixed: Replace all uses of `absolute_url` by `relative_url`, by [@svrooij] in [#544]
+- Added: custom favicon `_includes` by [@burner1024] in [#364]
+- Added: set color for search input by [@pdmosses] in [#498]
+- Added: search placeholder configuration by [@mattxwang] in [#613]
+- Added: 'child_nav_order' front matter to be able to sort navigation pages in reverse by [@jmertic] in [#726]
+- Added: `nav_footer_custom` include by [@nathanjessen] in [#474]
+- Added: style fixes for jekyll-asciidoc by [@alyssais] in [#829]
+- Added: mermaid.js support by [@nascosto] in [#857]
+- Added: support for external navigation links by [@SPGoding] in [#876]
+- Added: refactor `mermaid` config to use `mermaid_config.js` include, only require `mermaid.version` in `_config.yml` by [@mattxwang] in [#909]
+- Added: accessible titles to nested page nav toggle by [@JPrevost] in [#950]
+- Added: better title styling for AsciiDoc examples by [@alyssais] in [#944]
+- Added: docs for custom search placeholder by [@mattxwang] in [#939]
+- Added: provide ability to skip to main content by [@JPrevost] in [#949]
+- Added: styling for `<blockquote>` by [@mattxwang] in [#965]
+- Added: custom include for TOC heading by [@pdmosses] in [#980]
+- Added: experimental nav optimization for simple cases by [@pdmosses] in [#992]
+- Added: support multiple Google Analytics tracking IDs, document UA -> GA4 switch by [@MichelleBlanchette] in [#1029]
+- Added: copy code button to code snippets by [@simonebortolin] in [#945]
+- Added: restore simple configuration of `favicon.ico` via `site.static_files` by [@pdmosses] in [#1095]
+- Added: modularize site components by [@mattxwang] in [#1058]
+- Added: includes for custom `lunr` Liquid and JS code by [@diablodale] in [#1068]
+- Added: new `_sass/custom/setup.scss` for variable definition by [@mattxwang] in [#1135]
+- Added: configuration key to load a local version of mermaid by [@fabrik42] in [#1153]
+
+### Bugfixes
+
+- Fixed: prepend `site.collections_dir` if exists by [@alexsegura] in [#519]
+- Fixed: nested task lists (#517) by [@pdmosses] in [#855]
+- Fixed: suppress Liquid processing in CSS comments by [@pdmosses] in [#686]
+- Fixed: prevent rake command from corrupting search data by [@pdmosses] in [#495]
+- Fixed: anchor heading links should be visible on focus by [@jacobhq] in [#846]
+- Fixed: add `overflow-x: auto` to `figure.highlight` by [@iridazzle] in [#727]
+- Fixed: add `overflow-wrap: word-break` to `body` by [@iridazzle] in [#889]
+- Fixed: vertical alignment for consecutive labels by [@Eisverygoodletter] in [#893]
+- Fixed: allow links to wrap by [@pdmosses] in [#905]
+- Fixed: nav scroll feature and absolute/relative URLs by [@pdmosses] in [#898]
+- Fixed: exclude `vendor/` in Jekyll config by [@manuelhenke] in [#941]
+- Fixed: improve build time of navigation panel by [@pdmosses] in [#956]
+- Fixed: spacing issue when search is disabled by [@henryiii] in [#960]
+- Fixed: active grandchild link class by [@pdmosses] in [#962]
+- Fixed: HTML validation issues (W3C validator) by [@mattxwang] in [#964]
+- Fixed: link styling now uses `text-decoration` values by [@mattxwang] in [#967]
+- Fixed: cleaning up Jekyll excludes by [@pdmosses] in [#985]
+- Fixed: docs, narrow styling for code highlighting with line numbers by [@pdmosses] in [#974]
+- Fixed: default syntax highlighting in custom color schemes [@pdmosses] in [#986]
+- Fixed: incorrect disambiguation in generated TOCs by [@pdmosses] in [#999]
+- Fixed: duplicated external links in collections by [@pdmosses] in [#1001]
+- Fixed: import order of `custom.scss`; puts at end by [@deseo] in [#1010]
+- Fixed: top-level active link styling by [@pdmosses] in [#1015]
+- Fixed: external links for sites with no pages by [@pdmosses] in [#1021]
+- Fixed: duplicate `title` if `jekyll-seo-tag` not in users's plugins by [@Tom-Brouwer] in [#1040]
+- Fixed: removes (duplicate) `favicon.html`, shifts content to `head_custom.html` by [@mattxwang] in [#1027]
+- Fixed: add `reversed`, deprecate `desc` for nav `child_nav_order` by [@jmertic] in [#1061]
+- Fixed: `child.child_nav_order` to `node.child_nav_order` by [@mattxwang] in [#1065]
+- Fixed: remove all uses of `/` as SASS division by [@mattxwang] in [#1074]
+    - note: this was originally merged as [#1074] with a bug; it was reverted in [#1076], and then reimplemented in [#1077]
+- Fixed: skip nav collection generation when site has no pages by [@pdmosses] in [#1092]
+- Fixed: standardize SCSS with `declaration-block-no-redundant-longhand-properties` by [@simonebortolin] in [#1102]
+- Fixed: incorrect `padding` property value pair in `labels.scss` by [@SConaway] in [#1104]
+- Fixed: various bugs with copy code button by [@simonebortolin] in [#1096]
+- Fixed: replace inline styling for `<svg>` icons by [@captn3m0] in [#1110]
+- Fixed: incorrect `padding` property value pair in `search.scss` by [@kevinlin1] in [#1123]
+- Fixed: minor spacing and comment nits by [@EricFromCanada] in [#1128]
+- Fixed: exclude images from being bundled with gem by [@m-r-mccormick] in [#1142]
+- Fixed: dark theme code block background, line number colors by [@m-r-mccormick] in [#1124]
+- Fixed: copy code button interaction with kramdown line numbers by [@mattxwang] in [#1143]
+
+### Maintenance
+
+- Added: VScode devcontainer by [@max06] in [#783]
+- Added: `webrick` to `Gemfile` by [@mattxwang] in [#799]
+- Added: 'This site is powered by Netlify.' to the footer by [@mattxwang] in [#797]
+- Updated: new repo path by [@pmarsceill] in [#775]
+- Updated: rename `master` -> `main` by [@pmarsceill] in [#776]
+- Updated: README by [@pmarsceill] in [#777]
+- Updated: Code of Conduct to Contributor Covenant v2.1 by [@mattxwang] in [#790]
+- Updated: CI files, Ruby & Node Versions by [@mattxwang] in [#820]
+- Updated: Stylelint to v14, extend SCSS plugins, remove primer-* configs, resolve issues by [@mattxwang] in [#821]
+- Deleted: unused script directory by [@mattxwang] in [#937]
+- Vendor: update `jekyll-anchor-headings`, `lunr.js` by [@mattxwang] in [#1071]
+
+### Documentation
+
+- Added: docs on how to break an `ol` by [@pdmosses] in [#856]
+- Added: docs for custom includes by [@nathanjessen] in [#806]
+- Added: document caveat about variable dependencies by [@waldyrious] in [#555]
+- Added: docs on how to use `custom_head` to add a custom favicon by [@UnclassedPenguin] in [#814]
+- Added: docs load mermaid.js by default by [@mattxwang] in [#935]
+- Added: warning about mandatory `_`-prefix for collections by [@max06] in [#1091]
+- Added:  migration guide by [@pdmosses] in [#1059]
+- Added: label new features introduced in `v0.4` by [@mattxwang] in [#1138]
+- Fixed: `ol` on `index.md` by [@pmarsceill] in [#778]
+- Fixed: image link in Markdown kitchen sink by [@JeffGuKang] in [#221]
+- Fixed: images in Markdown kitchen sink by [@dougaitken] in [#782]
+- Fixed: clearer label of link to Jekyll quickstart by [@waldyrious] in [#549]
+- Fixed: remove extra spaces in component docs by [@MichelleBlanchette] in [#554]
+- Fixed: double "your" typo in `index.md` by [@sehilyi] in [#499]
+- Fixed: "you" -> "your" typo in `index.md` by [@nathanjessen] in [#473]
+- Fixed: spacing in toc example by [@henryiii] in [#835]
+- Fixed: typo in `README` on `_config.yml` by [@ivanskodje] in [#891]
+- Fixed: missing code fence in navigation structure docs by [@mattxwang] in [#906]
+- Fixed: table of contents on search docs by [@robinpokorny] in [#940]
+- Fixed: broken docs link (custom footer) by [@olgarithms] in [#951]
+- Fixed: clarify version docs by [@pdmosses] in [#955]
+- Fixed: typo in changelog links [@koppor] in [#1000]
+- Fixed: two bugs in "Customization" (custom favicon, new annotation) by [@mattxwang] in [#1090]
+- Fixed: "View Typography Utilities" link by [@agabrys] in [#1130]
+- Fixed: broken relative page links by [@mattxwang] in [#1106]
+- Fixed: clarify steps to add custom `lunr` index code by [@diablodale] in [#1139]
+- Updated: homepage (focus: new features, conciseness, deduplication) by [@pdmosses] in [#1018]
+- Updated: README (focus: new features, conciseness, deduplication) by [@pdmosses] in [#1019]
+- Updated: `README` demo video by [@codewithfan] in [#1097]
+
+### New Contributors
+
+- [@AdityaTiwari2102] made their first contribution in [#477]
+- [@svrooij] made their first contribution in [#544]
+- [@alexsegura] made their first contribution in [#519]
+- [@burner1024] made their first contribution in [#364]
+- [@JeffGuKang] made their first contribution in [#221]
+- [@dougaitken] made their first contribution in [#782]
+- [@max06] made their first contribution in [#783]
+- [@sehilyi] made their first contribution in [#499]
+- [@nathanjessen] made their first contribution in [#473]
+- [@waldyrious] made their first contribution in [#549]
+- [@MichelleBlanchette] made their first contribution in [#554]
+- [@henryiii] made their first contribution in [#835]
+- [@jmertic] made their first contribution in [#726]
+- [@jacobhq] made their first contribution in [#846]
+- [@UnclassedPenguin] made their first contribution in [#814]
+- [@alyssais] made their first contribution in [#829]
+- [@nascosto] made their first contribution in [#857]
+- [@SPGoding] made their first contribution in [#876]
+- [@iridazzle] made their first contribution in [#727]
+- [@ivanskodje] made their first contribution in [#891]
+- [@Eisverygoodletter] made their first contribution in [#893]
+- [@robinpokorny] made their first contribution in [#940]
+- [@olgarithms] made their first contribution in [#951]
+- [@manuelhenke] made their first contribution in [#941]
+- [@JPrevost] made their first contribution in [#950]
+- [@koppor] made their first contribution in [#1000]
+- [@deseo] made their first contribution in [#1010]
+- [@Tom-Brouwer] made their first contribution in [#1040]
+- [@simonebortolin] made their first contribution in [#945]
+- [@SConaway] made their first contribution in [#1104]
+- [@captn3m0] made their first contribution in [#1110]
+- [@kevinlin1] made their first contribution in [#1123]
+- [@codewithfan] made their first contribution in [#1097]
+- [@agabrys] made their first contribution in [#1130]
+- [@diablodale] made their first contribution in [#1068]
+- [@m-r-mccormick] made their first contribution in [#1142]
+- [@fabrik42] made their first contribution in [#1153]
+
+## Pre-release v0.4.0.rc5
+
+Hi everyone, we're so excited to finally release `v0.4.0`! For posterity's sake, we're going to release `v0.4.0.rc5` and then immediately re-release it as `v0.4.0`; this should make it more clear what changes were introduced in the lead up to the minor release.
+
+This RC does not introduce any major user-facing features. It adds more customizability for custom SCSS variables (fixing a bug with callout introduction order), `lunr` indexing, and loading `mermaid` locally. In addition, it fixes bugs introduced in `.rc4`: incorrect CSS, inconsistencies with code block backgrounds in dark theme, and the copy code button. It also adds a migration guide for users coming from `v0.3.3`.
+
+### Trying out pre-release `v0.4.0.rc5`
+
+Simlar to the prior release, `v0.4.0.rc5` is a **release candidate** for the theme (i.e., a pre-release) with release `v0.4.0` following immediately after. While we don't anticipate many users using this RC, it is still possible to opt-in.
+
+To use this RC explicitly as a remote theme:
+
+```yml
+remote_theme: just-the-docs/just-the-docs@v0.4.0.rc5
+```
+
+To use this RC explicitly as a gem-based theme, pin the version in your `Gemfile` and re-run `bundle install` or `bundle update just-the-docs`:
+
+```ruby
+gem "just-the-docs", "0.4.0.rc5"
+```
+
+By default, **users will not be upgraded to `0.4.0.rc5`**. To enforce that explicitly, either:
+
+1. pin your gem version in your `Gemfile`, like so
+```ruby
+gem "just-the-docs", "0.3.3"
+```
+2. freeze the `remote_theme`, like so
+```yml
+remote_theme: just-the-docs/just-the-docs@v0.3.3
+```
+
+### New Features
+
+- Added: includes for custom `lunr` Liquid and JS code by [@diablodale] in [#1068]
+- Added: new `_sass/custom/setup.scss` for variable definition by [@mattxwang] in [#1135]
+- Added: configuration key to load a local version of mermaid by [@fabrik42] in [#1153]
+
+### Bugfixes and Maintenance
+
+- Fixed: incorrect `padding` property value pair in `search.scss` by [@kevinlin1] in [#1123]
+- Fixed: minor spacing and comment nits by [@EricFromCanada] in [#1128]
+- Fixed: exclude images from being bundled with gem by [@m-r-mccormick] in [#1142]
+- Fixed: dark theme code block background, line number colors by [@m-r-mccormick] in [#1124]
+- Fixed: copy code button interaction with kramdown line numbers by [@mattxwang] in [#1143]
+
+### Docs
+
+- Docs: add a migration guide by [@pdmosses] in [#1059]
+- Docs: update `README` demo video by [@codewithfan] in [#1097]
+- Docs: update "View Typography Utilities" link by [@agabrys] in [#1130]
+- Docs: fix broken relative page links by [@mattxwang] in [#1106]
+- Docs: clarify steps to add custom `lunr` index code by [@diablodale] in [#1139]
+- Docs: label new features introduced in `v0.4` by [@mattxwang] in [#1138]
+
+### New Contributors
+
+- [@kevinlin1] made their first contribution in [#1123]
+- [@codewithfan] made their first contribution in [#1097]
+- [@agabrys] made their first contribution in [#1130]
+- [@diablodale] made their first contribution in [#1068]
+- [@m-r-mccormick] made their first contribution in [#1142]
+- [@fabrik42] made their first contribution in [#1153]
+
+[#1059]: https://github.com/just-the-docs/just-the-docs/pull/1059
+[#1068]: https://github.com/just-the-docs/just-the-docs/pull/1068
+[#1097]: https://github.com/just-the-docs/just-the-docs/pull/1097
+[#1106]: https://github.com/just-the-docs/just-the-docs/pull/1106
+[#1123]: https://github.com/just-the-docs/just-the-docs/pull/1123
+[#1124]: https://github.com/just-the-docs/just-the-docs/pull/1124
+[#1128]: https://github.com/just-the-docs/just-the-docs/pull/1128
+[#1130]: https://github.com/just-the-docs/just-the-docs/pull/1130
+[#1135]: https://github.com/just-the-docs/just-the-docs/pull/1135
+[#1138]: https://github.com/just-the-docs/just-the-docs/pull/1138
+[#1139]: https://github.com/just-the-docs/just-the-docs/pull/1139
+[#1142]: https://github.com/just-the-docs/just-the-docs/pull/1142
+[#1143]: https://github.com/just-the-docs/just-the-docs/pull/1143
+[#1153]: https://github.com/just-the-docs/just-the-docs/pull/1153
+
+[@agabrys]: https://github.com/agabrys
+[@codewithfan]: https://github.com/codewithfan
+[@diablodale]: https://github.com/diablodale
+[@fabrik42]: https://github.com/fabrik42
+[@kevinlin1]: https://github.com/kevinlin1
+[@EricFromCanada]: https://github.com/EricFromCanada
+[@m-r-mccormick]: https://github.com/m-r-mccormick
+
+## Pre-release v0.4.0.rc4
+
+Happy new year! We're celebrating with another pre-release, with features that should help theme users better adapt to changes moving forward. **We aim to re-release this as `v0.4.0`, with only few changes**.
+
+Notable new additions include:
+
+- modular site components, which split up the site into smaller reusable components; advanced theme users can then remix layouts quickly without duplication
+- a "copy code" button to code blocks
+- fixing bugs in generated TOCs and navigation from previous prereleases
+- various cleanups of CSS and HTML markup
+
+The roadmap to `v0.4.0` is small. We are only looking to:
+
+- finish a migration guide, so users can easily upgrade from `v0.3.3` to `v0.4.0`
+- fix one last bug relating to callouts and custom colors
+- fix any new bugs introduced by this pre-release
+
+Have any questions, thoughts, or concerns? We'd love to hear from you! Please [open an issue](https://github.com/just-the-docs/just-the-docs/issues) or [start a discussion](https://github.com/just-the-docs/just-the-docs/discussions) and let us know!
+
+### Trying out pre-release `v0.4.0.rc4`
+
+Simlar to the prior release, `v0.4.0.rc4` is a **release candidate** for the theme (i.e., a pre-release) with release `v0.4.0` coming soon. We want your help in testing the changes! As of now, the gem on RubyGems and the repository are updated to `v0.4.0.rc4`.
+
+To use this RC explicitly as a remote theme:
+
+```yml
+remote_theme: just-the-docs/just-the-docs@v0.4.0.rc4
+```
+
+To use this RC explicitly as a gem-based theme, pin the version in your `Gemfile` and re-run `bundle install` or `bundle update just-the-docs`:
+
+```ruby
+gem "just-the-docs", "0.4.0.rc4"
+```
+
+By default, **users will not be upgraded to `0.4.0.rc4`**. To enforce that explicitly, either:
+
+1. pin your gem version in your `Gemfile`, like so
+```ruby
+gem "just-the-docs", "0.3.3"
+```
+2. freeze the `remote_theme`, like so
+```yml
+remote_theme: just-the-docs/just-the-docs@v0.3.3
+```
+
+### New Features
+
+- Added: support multiple Google Analytics tracking IDs, document UA -> GA4 switch by [@MichelleBlanchette] in [#1029]
+- Added: copy code button to code snippets by [@simonebortolin] in [#945]
+- Added: restore simple configuration of `favicon.ico` via `site.static_files` by [@pdmosses] in [#1095]
+- Added: modularize site components by [@mattxwang] in [#1058]
+
+### Bugfixes and Maintenance
+
+- Fixed: incorrect disambiguation in generated TOCs by [@pdmosses] in [#999]
+- Fixed: duplicated external links in collections by [@pdmosses] in [#1001]
+- Fixed: import order of `custom.scss`; puts at end by [@deseo] in [#1010]
+- Fixed: top-level active link styling by [@pdmosses] in [#1015]
+- Fixed: external links for sites with no pages by [@pdmosses] in [#1021]
+- Fixed: duplicate `title` if `jekyll-seo-tag` not in users's plugins by [@Tom-Brouwer] in [#1040]
+- Fixed: removes (duplicate) `favicon.html`, shifts content to `head_custom.html` by [@mattxwang] in [#1027]
+- Fixed: add `reversed`, deprecate `desc` for nav `child_nav_order` by [@jmertic] in [#1061]
+- Fixed: `child.child_nav_order` to `node.child_nav_order` by [@mattxwang] in [#1065]
+- Fixed: remove all uses of `/` as SASS division by [@mattxwang] in [#1074]
+    - note: this was originally merged as [#1074] with a bug; it was reverted in [#1076], and then reimplemented in [#1077]
+- Fixed: skip nav collection generation when site has no pages by [@pdmosses] in [#1092]
+- Fixed: standardize SCSS with `declaration-block-no-redundant-longhand-properties` by [@simonebortolin] in [#1102]
+- Fixed: incorrect `padding` property value pair in `labels.scss` by [@SConaway] in [#1104]
+- Fixed: various bugs with copy code button by [@simonebortolin] in [#1096]
+- Fixed: replace inline styling for `<svg>` icons by [@captn3m0] in [#1110]
+- Vendor: update `jekyll-anchor-headings`, `lunr.js` by [@mattxwang] in [#1071]
+
+### Docs
+
+- Docs: fix typo in changelog links [@koppor] in [#1000]
+- Docs: update homepage (focus: new features, conciseness, deduplication) by [@pdmosses] in [#1018]
+- Docs: update README (focus: new features, conciseness, deduplication) by [@pdmosses] in [#1019]
+- Docs: fix two bugs in "Customization" (custom favicon, new annotation) by [@mattxwang] in [#1090]
+- Docs: Add warning about mandatory `_`-prefix for collections by [@max06] in [#1091]
+- Docs: remove Google Analytics on main site by [@mattxwang] in [#1113]
+
+### New Contributors
+
+- [@koppor] made their first contribution in [#1000]
+- [@deseo] made their first contribution in [#1010]
+- [@Tom-Brouwer] made their first contribution in [#1040]
+- [@simonebortolin] made their first contribution in [#945]
+- [@SConaway] made their first contribution in [#1104]
+- [@captn3m0] made their first contribution in [#1110]
+
+**Full Changelog**: https://github.com/just-the-docs/just-the-docs/compare/v0.4.0.rc3...v0.4.0.rc4
+
+[#945]: https://github.com/just-the-docs/just-the-docs/pull/945
+[#999]: https://github.com/just-the-docs/just-the-docs/pull/999
+[#1000]: https://github.com/just-the-docs/just-the-docs/pull/1000
+[#1001]: https://github.com/just-the-docs/just-the-docs/pull/1001
+[#1010]: https://github.com/just-the-docs/just-the-docs/pull/1010
+[#1015]: https://github.com/just-the-docs/just-the-docs/pull/1015
+[#1018]: https://github.com/just-the-docs/just-the-docs/pull/1018
+[#1019]: https://github.com/just-the-docs/just-the-docs/pull/1019
+[#1021]: https://github.com/just-the-docs/just-the-docs/pull/1021
+[#1027]: https://github.com/just-the-docs/just-the-docs/pull/1027
+[#1029]: https://github.com/just-the-docs/just-the-docs/pull/1029
+[#1040]: https://github.com/just-the-docs/just-the-docs/pull/1040
+[#1058]: https://github.com/just-the-docs/just-the-docs/pull/1058
+[#1061]: https://github.com/just-the-docs/just-the-docs/pull/1061
+[#1065]: https://github.com/just-the-docs/just-the-docs/pull/1065
+[#1071]: https://github.com/just-the-docs/just-the-docs/pull/1071
+[#1074]: https://github.com/just-the-docs/just-the-docs/pull/1074
+[#1076]: https://github.com/just-the-docs/just-the-docs/pull/1076
+[#1077]: https://github.com/just-the-docs/just-the-docs/pull/1077
+[#1090]: https://github.com/just-the-docs/just-the-docs/pull/1090
+[#1091]: https://github.com/just-the-docs/just-the-docs/pull/1091
+[#1092]: https://github.com/just-the-docs/just-the-docs/pull/1092
+[#1095]: https://github.com/just-the-docs/just-the-docs/pull/1095
+[#1096]: https://github.com/just-the-docs/just-the-docs/pull/1096
+[#1102]: https://github.com/just-the-docs/just-the-docs/pull/1102
+[#1104]: https://github.com/just-the-docs/just-the-docs/pull/1104
+[#1110]: https://github.com/just-the-docs/just-the-docs/pull/1110
+[#1113]: https://github.com/just-the-docs/just-the-docs/pull/1113
+
+[@captn3m0]: https://github.com/captn3m0
+[@deseo]: https://github.com/deseo
+[@koppor]: https://github.com/koppor
+[@MichelleBlanchette]: https://github.com/MichelleBlanchette
+[@simonebortolin]: https://github.com/simonebortolin
+[@SConaway]: https://github.com/SConaway
+[@Tom-Brouwer]: https://github.com/Tom-Brouwer
+
+## Pre-release v0.4.0.rc3
+
+Hi there! This is (actually) hopefully the last prerelease before `v0.4.0`; in particular, if we find that this prerelease is stable, we'll re-release it as `v0.4.0`.
+
+In general, this is a more mature pre-release; there are few new features. However, we'll highlight [@pdmosses]'s work in [#992] to better optimize nav generation for large sites (ex 100+ pages). We don't expect this to affect most users; however, **it is technically a breaking change**, and we suggest testing your site before upgrading to this prerelease.
+
+We want your feedback! Please [open an issue](https://github.com/just-the-docs/just-the-docs/issues) or [start a discussion](https://github.com/just-the-docs/just-the-docs/discussions) and let us know!
+
+As soon as we get stable test results from major downstream users, we'll push out a `v0.4.0` ASAP - closing out almost 2 years of backlogged work!
+
+### Trying out pre-release `v0.4.0.rc3`
+
+Simlar to the prior release, `v0.4.0.rc3` is a **release candidate** for the theme (i.e., a pre-release) with release `v0.4.0` coming soon. We want your help in testing the changes! As of now, the gem on RubyGems and the repository are updated to `v0.4.0.rc3`.
+
+To use this RC explicitly as a remote theme:
+
+```yml
+remote_theme: just-the-docs/just-the-docs@v0.4.0.rc3
+```
+
+To use this RC explicitly as a gem-based theme, pin the version in your `Gemfile` and re-run `bundle install` or `bundle update just-the-docs`:
+
+```ruby
+gem "just-the-docs", "0.4.0.rc3"
+```
+
+By default, **users will not be upgraded to `0.4.0.rc3`**. To enforce that explicitly, either:
+
+1. pin your gem version in your `Gemfile`, like so
+```ruby
+gem "just-the-docs", "0.3.3"
+```
+2. freeze the `remote_theme`, like so
+```yml
+remote_theme: just-the-docs/just-the-docs@v0.3.3
+```
 
 ### Features
 
-- Add reCAPTCHA to the contact form ([#365](https://github.com/lxndrblz/anatole/issues/365)) ([06847f3](https://github.com/lxndrblz/anatole/commit/06847f35a19834ff26c60b691522107fa201a7a5))
-- add rel-me to social links ([#394](https://github.com/lxndrblz/anatole/issues/394)) ([210f632](https://github.com/lxndrblz/anatole/commit/210f6321cac602c948bc6c92344743e6d8cf4cfd))
-- added mermaid support for displaying diagrams ([#359](https://github.com/lxndrblz/anatole/issues/359)) ([d511a6f](https://github.com/lxndrblz/anatole/commit/d511a6f520bcc2ffab10ce009239904774ed6bb0))
-- added TR language ([#401](https://github.com/lxndrblz/anatole/issues/401)) ([b2faf30](https://github.com/lxndrblz/anatole/commit/b2faf30d428b37fb45025c08e3ef42eb2a3006f6))
-- localized dates ([#373](https://github.com/lxndrblz/anatole/issues/373)) ([c097ab9](https://github.com/lxndrblz/anatole/commit/c097ab90ab82e257d961b4122e690d25aeb1f6ea))
-- translate series label ([#372](https://github.com/lxndrblz/anatole/issues/372)) ([2fbe51c](https://github.com/lxndrblz/anatole/commit/2fbe51c98f2669eadeef8c1c2d00ee158d67a440))
-- trim the whitespace from the HTML meta tags ([#367](https://github.com/lxndrblz/anatole/issues/367)) ([6747495](https://github.com/lxndrblz/anatole/commit/67474957d7cfd7da342df3c4908b1162effc5e2d))
-- update Font Awesome and add Regular variant ([#375](https://github.com/lxndrblz/anatole/issues/375)) ([1d18d09](https://github.com/lxndrblz/anatole/commit/1d18d09bd63421735aff63f065ba36d4a41e6684))
+Broadly, this prerelease is feature-light!
 
-### Bug Fixes
+- Added: styling for `<blockquote>` by [@mattxwang] in [#965]
+- Added: custom include for TOC heading by [@pdmosses] in [#980]
 
-- move theme class to root node to prevent white flash ([#392](https://github.com/lxndrblz/anatole/issues/392)) ([c36e1d8](https://github.com/lxndrblz/anatole/commit/c36e1d8fff70ab6a817e00aa053b996342554681))
-- prettier error with go template ([#398](https://github.com/lxndrblz/anatole/issues/398)) ([549a722](https://github.com/lxndrblz/anatole/commit/549a722314ac6d8397ffa1802426480641c92064))
-- properly escape title in schema ([#358](https://github.com/lxndrblz/anatole/issues/358)) ([c0c367c](https://github.com/lxndrblz/anatole/commit/c0c367c2de79783614b926a0661e287fc401af20))
-- resolve dependency conflict conventional changelog release it ([#388](https://github.com/lxndrblz/anatole/issues/388)) ([b86ecc7](https://github.com/lxndrblz/anatole/commit/b86ecc78a16aa7348fdc9c4175d3daca16bd4fe8))
-- update FA translation ([#400](https://github.com/lxndrblz/anatole/issues/400)) ([24afb94](https://github.com/lxndrblz/anatole/commit/24afb94d40460a32eef5b3458e73197eca89901e))
+### Bugfixes and Experimental Features
 
-## [1.11.0](https://github.com/lxndrblz/anatole/compare/v1.10.0...v1.11.0) (2022-05-13)
+*Note*: experimental nav optimization may be unstable. Please give us feedback!
 
-### Features
+- Added: experimental nav optimization for simple cases by [@pdmosses] in [#992]
+- Fixed: spacing issue when search is disabled by [@henryiii] in [#960]
+- Fixed: active grandchild link class by [@pdmosses] in [#962]
+- Fixed: HTML validation issues (W3C validator) by [@mattxwang] in [#964]
+- Fixed: link styling now uses `text-decoration` values by [@mattxwang] in [#967]
+- Fixed: cleaning up Jekyll excludes by [@pdmosses] in [#985]
+- Fixed: docs, narrow styling for code highlighting with line numbers by [@pdmosses] in [#974]
+- Fixed: default syntax highlighting in custom color schemes [@pdmosses] in [#986]
 
-- added support for navigation menu dropdown ([#344](https://github.com/lxndrblz/anatole/issues/344)) ([6c55d42](https://github.com/lxndrblz/anatole/commit/6c55d4282e1e460afb56a19e70058f05d738e85d))
+[#965]: https://github.com/just-the-docs/just-the-docs/pull/965
+[#960]: https://github.com/just-the-docs/just-the-docs/pull/960
+[#962]: https://github.com/just-the-docs/just-the-docs/pull/962
+[#964]: https://github.com/just-the-docs/just-the-docs/pull/964
+[#967]: https://github.com/just-the-docs/just-the-docs/pull/967
+[#974]: https://github.com/just-the-docs/just-the-docs/pull/974
+[#980]: https://github.com/just-the-docs/just-the-docs/pull/980
+[#985]: https://github.com/just-the-docs/just-the-docs/pull/985
+[#986]: https://github.com/just-the-docs/just-the-docs/pull/986
+[#992]: https://github.com/just-the-docs/just-the-docs/pull/992
 
-### Bug Fixes
+[@henryiii]: https://github.com/henryiii
 
-- apply active class to submenu items ([#350](https://github.com/lxndrblz/anatole/issues/350)) ([ec5066b](https://github.com/lxndrblz/anatole/commit/ec5066bdb57e8927150cb9e1b37ad0cedb047716))
-- incorrect display of submenu items when multiple menu dropdowns are implemented ([#354](https://github.com/lxndrblz/anatole/issues/354)) ([1959fa6](https://github.com/lxndrblz/anatole/commit/1959fa6d400511da65044c29f1bc7c7030a31ca6)), closes [#352](https://github.com/lxndrblz/anatole/issues/352)
-- open social links in a new tab ([#353](https://github.com/lxndrblz/anatole/issues/353)) ([81c4208](https://github.com/lxndrblz/anatole/commit/81c4208b6778ad3a730f7f654106942a9a1e7ff9))
+**Full Changelog**: https://github.com/just-the-docs/just-the-docs/compare/v0.4.0.rc2...v0.4.0.rc3
 
-## [1.10.0](https://github.com/lxndrblz/anatole/compare/v1.9.0...v1.10.0) (2022-04-16)
+## Pre-release v0.4.0.rc2
 
-### Features
+{: .warning }
+This website includes docs for some new features that are not available in `v0.4.0.rc1` and `v0.3.3`!
 
-- use front matter description as rss item description ([89c8c65](https://github.com/lxndrblz/anatole/commit/89c8c6558702bf29fc1b07137d29ce80ab06ed5f))
+Hey there! This is likely the last pre-release before releasing `v0.4.0`, which we plan on doing soon (i.e. before the end of the month) - very exciting! Some new additions to highlight:
 
-### Bug Fixes
+- significant improvement on build time of navigation panel by [@pdmosses]
+  - this is big: for a community member with over 300 pages, we shortened the build time from 3 minutes to 30 seconds!
+- improved accessibility features led by [@JPrevost]
+- more docs!
 
-- loading the correct internal Google Analytics template for v4 token ([ec0175a](https://github.com/lxndrblz/anatole/commit/ec0175a4ed4131f4cf26d723c243d388b421d7eb)), closes [#339](https://github.com/lxndrblz/anatole/issues/339)
-- remove double h1 tags ([#347](https://github.com/lxndrblz/anatole/issues/347)) ([849a2f2](https://github.com/lxndrblz/anatole/commit/849a2f2d9bca2928df6e86e98576e4ec2988d65f))
+The intention of this release candidate is to gather even more feedback on a potential `v0.4.0`. As it stands, we have not encountered any breaking changes with early adopters of `v0.4.0.rc1`. If you encounter any - for either of our pre-releases - please let us know!
 
-## [1.9.0](https://github.com/lxndrblz/anatole/compare/v1.8.0...v1.9.0) (2022-03-27)
+### Trying out pre-release `v0.4.0.rc2`
 
-### Features
+Simlar to the prior release, `v0.4.0.rc2` is a **release candidate** for the theme (i.e., a pre-release) with release `v0.4.0` coming soon. We want your help in testing the changes! As of now, the gem on RubyGems and the repository are updated to `v0.4.0.rc2`.
 
-- add a notice shortcode ([212d6cc](https://github.com/lxndrblz/anatole/commit/212d6ccae4ac6a029352fba397219eaf1d30e623))
-- Add option to display related posts ([#300](https://github.com/lxndrblz/anatole/issues/300)) ([6ad4d7a](https://github.com/lxndrblz/anatole/commit/6ad4d7aea163240dbb76ed405125c7e3eeda2605))
-- add the option to hide the sidebar on post pages ([a9d3b1d](https://github.com/lxndrblz/anatole/commit/a9d3b1dd926dfc3ba5aacb0928b811fc318309e8))
-- added meta author HTML tag ([1a063c8](https://github.com/lxndrblz/anatole/commit/1a063c8d5dcf3f6960f9df1de465c832f51b6d53))
-- avoid wrapping text of navigation items ([4ba5593](https://github.com/lxndrblz/anatole/commit/4ba5593c7282720fed7fc0eada17c025cba4089f))
-- layout improvements for portfolio ([3685a7d](https://github.com/lxndrblz/anatole/commit/3685a7dfa6d3f62670f0d2cd57cc80dbfcca00fe))
-- set open graph meta tags without requiring series taxonomy ([579d768](https://github.com/lxndrblz/anatole/commit/579d7682f2c91dc7d36e5f028ee999e91c3e8265))
+To use this RC explicitly as a remote theme:
 
-### Bug Fixes
+```yml
+remote_theme: just-the-docs/just-the-docs@v0.4.0.rc2
+```
 
-- enable sidebar by default ([36ea4a8](https://github.com/lxndrblz/anatole/commit/36ea4a8ca1e5d0abe795419dd0555ee0b1b583b5))
-- increase padding on the x-axis ([fbecf7f](https://github.com/lxndrblz/anatole/commit/fbecf7ff34a8435eb72479cdba59468c5863270e))
-- minify fontawesome files format to resolve integrity check errors ([#335](https://github.com/lxndrblz/anatole/issues/335)) ([0e03d3f](https://github.com/lxndrblz/anatole/commit/0e03d3fc86c1bcb7fa99c9a87a041643d71cb1e6))
-- mobile and ultrawide views ([799d134](https://github.com/lxndrblz/anatole/commit/799d134e57a67c477bcb455d5e4dbe97e3a65b90))
-- non styled summary ([f345853](https://github.com/lxndrblz/anatole/commit/f345853fe8d314f612e218e6c035d75271846eae))
-- refactor SCSS according to BEM standards ([342ffd3](https://github.com/lxndrblz/anatole/commit/342ffd371483bdba81ca130a18ec162378e53cae))
-- refactor sidebar SCSS ([14af37f](https://github.com/lxndrblz/anatole/commit/14af37f0df41a0abcd691bc3d2c759f74e5db42e))
-- removed obsolete css properties ([e985a59](https://github.com/lxndrblz/anatole/commit/e985a599598c12b344848850c6897bace6060e99))
-- show sidebar only on homepage ([3db4bb0](https://github.com/lxndrblz/anatole/commit/3db4bb0f8eb2f47076ec1858cb19cdf7148f07db))
+To use this RC explicitly as a gem-based theme, pin the version in your `Gemfile` and re-run `bundle install` or `bundle update just-the-docs`:
 
-### Reverts
+```ruby
+gem "just-the-docs", "0.4.0.rc2"
+```
 
-- Revert "ci: temporarily invoke workflow for testing purposes" ([a6aa3e4](https://github.com/lxndrblz/anatole/commit/a6aa3e487419fab865c3ab3286eeefc49dc9e9f4))
-- Revert "ci: temporarily invoke workflow for testing purposes" ([b3011c1](https://github.com/lxndrblz/anatole/commit/b3011c10efc2344873bb85696854fbe6bcfc91e9))
-- Revert "ci: temporarily invoke workflow for testing purposes" ([1ff8217](https://github.com/lxndrblz/anatole/commit/1ff82174fb1bb6003725fe52f4c650eb807006e7))
+By default, **users will not be upgraded to `0.4.0.rc2`**. To enforce that explicitly, either:
 
-## [1.8.0](https://github.com/lxndrblz/anatole/compare/v1.7.0...v1.8.0) (2022-03-10)
-
-### Features
-
-- add bottom spacing in case of row wraps ([a22f17c](https://github.com/lxndrblz/anatole/commit/a22f17ca78345ba84e45c9428ecb5ab1737172b1))
-- add padding to navbar burger ([d277672](https://github.com/lxndrblz/anatole/commit/d277672c66a58cdecc9aed61f77f28959ecaab7b)), closes [#308](https://github.com/lxndrblz/anatole/issues/308)
-- add size options to figure shortcode ([a8c3d31](https://github.com/lxndrblz/anatole/commit/a8c3d31a715db10885ffa84f79810899f2264856))
-- include credits to FontAwesome ([12ff26f](https://github.com/lxndrblz/anatole/commit/12ff26f433d1bcd2e5b1b130a44b087b298cc79f))
-- load fontawesome from local server ([2d0d448](https://github.com/lxndrblz/anatole/commit/2d0d448284c65746361730ca2c10185a616ca542)), closes [#299](https://github.com/lxndrblz/anatole/issues/299)
-- reduce size of big figure ([a7d4d91](https://github.com/lxndrblz/anatole/commit/a7d4d91b7a1d665832cecf2073354ca15fc8af2f))
-- style portfolio metadata as list with icon start adornments ([2b05b86](https://github.com/lxndrblz/anatole/commit/2b05b8608380133f5fc65e0aba2dba274eefc1a3))
-- title case headings on content pages respectively keep user formatting ([8dc415c](https://github.com/lxndrblz/anatole/commit/8dc415c97890e8264a17c35906f763447c571b6b))
-- title case portfolio headings ([278c146](https://github.com/lxndrblz/anatole/commit/278c1461e333cc7c0d63d7abaf4a35a6ba64fc69))
-- uppercase headings on overview pages ([c14fb1e](https://github.com/lxndrblz/anatole/commit/c14fb1e46cd2d37a0fa0256d27cf7dfb997bd6f7))
-
-### Bug Fixes
-
-- [display] dark mode preference was not taken into account. ([57011f1](https://github.com/lxndrblz/anatole/commit/57011f1d2b04cc9032cedcd6af00301461725fa8))
-- chroma styling in post content ([923c738](https://github.com/lxndrblz/anatole/commit/923c738f9642fd3ff21c0463d70345ee62f52f3c))
-- increase padding slightly ([28a68e9](https://github.com/lxndrblz/anatole/commit/28a68e9cf80960ca1c54bef079bc004141beda7b))
-- w3c validator errors ([021c1e0](https://github.com/lxndrblz/anatole/commit/021c1e0e9bcb81ecb02182c587ad4d17b98f26f7)), closes [#309](https://github.com/lxndrblz/anatole/issues/309)
-
-## [1.7.0](https://github.com/lxndrblz/anatole/compare/v1.7.0...v1.8.0) (2022-02-21)
+1. pin your gem version in your `Gemfile`, like so
+```ruby
+gem "just-the-docs", "0.3.3"
+```
+2. freeze the `remote_theme`, like so
+```yml
+remote_theme: just-the-docs/just-the-docs@v0.3.3
+```
 
 ### Features
 
-- add makefile to generate resource folder ([0e610e4](https://github.com/lxndrblz/anatole/commit/0e610e4ba806b19a7aae01d5810691c0c6803b17))
-- added umami analytics ([#298](https://github.com/lxndrblz/anatole/issues/298)) ([a9cb563](https://github.com/lxndrblz/anatole/commit/a9cb5630a21a320d3d3c1afe3781fd289129273e))
-- added windows release target ([c4ac344](https://github.com/lxndrblz/anatole/commit/c4ac344e662445ea9f9752f7822b3d8bcb9f3cf0))
-- allow setting displayMode dark from params ([3be3958](https://github.com/lxndrblz/anatole/commit/3be3958812aff76710e17f58a370dd4601f061f8))
-- decrease border radius of thumbnail ([80598b5](https://github.com/lxndrblz/anatole/commit/80598b58c8330ef5b0013878355d374bc7098dca))
-- decrease font size h1; set font sizes if headings have nested a tags ([d2b4566](https://github.com/lxndrblz/anatole/commit/d2b4566616a5af9cad2e73676a622c6cf7c6812b))
-- decrease nav spacing ([0145c16](https://github.com/lxndrblz/anatole/commit/0145c1661d65ccd1a542092f75c2d84f544ea8cb))
-- increase font size of post title ([82b2cee](https://github.com/lxndrblz/anatole/commit/82b2cee0b41b72c73b853531c807df2115998879))
-- increase font size of sidebar title ([17b1b74](https://github.com/lxndrblz/anatole/commit/17b1b747a18d100267a0d9d04fcdb0881d25c1a2))
-- increase hero spacing on mobile ([94d6dac](https://github.com/lxndrblz/anatole/commit/94d6dacd133375300c44f50f99fa531686698983))
-- move info to post-meta and improve styles ([e17be94](https://github.com/lxndrblz/anatole/commit/e17be94391c5a232ac543f371b35ca6585786f36))
-- ported makefile to package.json script ([5bc180c](https://github.com/lxndrblz/anatole/commit/5bc180ccafbeb3d44d1f67e4e1fcc0b9b71ba3e3))
-- reduce border-radius ([08bc7f2](https://github.com/lxndrblz/anatole/commit/08bc7f227a82327ff15e5cac51c8bcf0b4778729))
-- reduce font size ([e92403b](https://github.com/lxndrblz/anatole/commit/e92403bff7ee9b0260e49ba915ebadf07c7978f0))
-- update screenshots ([b3c18d6](https://github.com/lxndrblz/anatole/commit/b3c18d68adccdd2728f040e4ddf0a3ffda2f0127))
-- url as link ([f6c8150](https://github.com/lxndrblz/anatole/commit/f6c81503e9f3e7f8f1b734295cbd9b51148d0153))
-- use standard font size for paragraphs ([951c109](https://github.com/lxndrblz/anatole/commit/951c109365d202d036fd58dc888f189fae660861))
+- Added: accessible titles to nested page nav toggle by [@JPrevost] in [#950]
+- Added: better title styling for AsciiDoc examples by [@alyssais] in [#944]
+- Added: docs for custom search placeholder by [@mattxwang] in [#939]
+- Added: provide ability to skip to main content by [@JPrevost] in [#949]
+- Fixed: exclude `vendor/` in Jekyll config by [@manuelhenke] in [#941]
+- Fixed: improve build time of navigation panel by [@pdmosses] in [#956]
 
-### Bug Fixes
+[#950]: https://github.com/just-the-docs/just-the-docs/pull/950
+[#944]: https://github.com/just-the-docs/just-the-docs/pull/944
+[#939]: https://github.com/just-the-docs/just-the-docs/pull/939
+[#949]: https://github.com/just-the-docs/just-the-docs/pull/949
+[#941]: https://github.com/just-the-docs/just-the-docs/pull/941
+[#956]: https://github.com/just-the-docs/just-the-docs/pull/956
 
-- add back gen folder ([cc80d58](https://github.com/lxndrblz/anatole/commit/cc80d588e9b725a2d972d90cd2f9819a85d1b531))
-- add generated resources to example site to ensure compatibility ([6dd1953](https://github.com/lxndrblz/anatole/commit/6dd19537bea5b3e89ef6579cbecdf174dd52f2e4))
-- add optional shx for echo statement ([c62550d](https://github.com/lxndrblz/anatole/commit/c62550ddfb0c93fed5e9e6ebcfef0abe2b7a4607))
-- alert colours ([4a788a6](https://github.com/lxndrblz/anatole/commit/4a788a66ea204bd68a1c7ac389047cd8dee95079))
-- align nav border highlight ([74fb537](https://github.com/lxndrblz/anatole/commit/74fb537c21fb75e779baf338b78d75f094da394e))
-- color portfolio mobile ([9affb74](https://github.com/lxndrblz/anatole/commit/9affb74a24c5ab7bde6f99e4fc7eab5071ae3c19))
-- define img max width ([75e1630](https://github.com/lxndrblz/anatole/commit/75e1630bbd235082d5a1c20fc6c12ec5fef61730))
-- deprecation warning global assignments won't be able to declare new variables in future versions ([9e5d138](https://github.com/lxndrblz/anatole/commit/9e5d138e97cd119226049c02cc31d4ea903eb711))
-- duplicate footers ([fe660be](https://github.com/lxndrblz/anatole/commit/fe660be1ebd4b448375ba3b0695f44b62b92b217))
-- languageswitcher triangle alignment and mobile spacing ([0a690aa](https://github.com/lxndrblz/anatole/commit/0a690aa0dceed6a372443dd8398ffd08e2702932))
-- make sure tag text is also in lighter color ([6678874](https://github.com/lxndrblz/anatole/commit/66788744649fdf5313b2514f75644b2f12d07ba1))
-- make themeswitch functionable again ([72f09ca](https://github.com/lxndrblz/anatole/commit/72f09ca2a9dd93c6d94b32eb5e5a3ecb2dbcc733))
-- medium zoom ([94973bf](https://github.com/lxndrblz/anatole/commit/94973bf4d053ed0940b54f2c4d69cb404b48b4fd))
-- nonmatching div footer ([5c84ace](https://github.com/lxndrblz/anatole/commit/5c84ace36c5273bcd70094b7fcce5dc8b10b3a2a))
-- portfolio stacking ([1d65174](https://github.com/lxndrblz/anatole/commit/1d65174b2471915180e6416a13c48c974caa0a76))
-- redundant main.scss ([4c85c2a](https://github.com/lxndrblz/anatole/commit/4c85c2a733f5ec12bbeea084f5bc8e550ff2ffe7))
-- remove fixed width to enable class big ([6f74c37](https://github.com/lxndrblz/anatole/commit/6f74c378ec215e412e3a5499cc4362b130ebc10b))
-- remove obsolete file ([9d78804](https://github.com/lxndrblz/anatole/commit/9d7880414f15049d0457db96ef9d75cc034cf4b4))
-- remove obsolete post class ([4c14755](https://github.com/lxndrblz/anatole/commit/4c147555e11ef0544d1da27d84f3187471829f87))
-- remove unnecessary padding on mobile ([a5e341b](https://github.com/lxndrblz/anatole/commit/a5e341bfded6289c5c940fc0014e27cdb502df1d))
-- removed unused SCSS classes ([698f821](https://github.com/lxndrblz/anatole/commit/698f821f77f25d84ed2f97924a4180633711ee8c))
-- rtl and ltr mode ([76e9a77](https://github.com/lxndrblz/anatole/commit/76e9a7708e7e71ff50ec7cb26f83e48430cbc045))
-- sonarcloud bug border ([57fb870](https://github.com/lxndrblz/anatole/commit/57fb870be4acd12156fd2439c816c904b2ff676f))
-- sonarcloud bugs ([96a38bd](https://github.com/lxndrblz/anatole/commit/96a38bd67868305489659903568df29d159c872a))
-- sonarcloud bugs ([2be0e35](https://github.com/lxndrblz/anatole/commit/2be0e353567140abe9b566f6be8e286ade036e0f))
-- spacing of alert box ([161496d](https://github.com/lxndrblz/anatole/commit/161496d0608336e4d6a99938a02a5d749d4e0a42))
-- styling contact form ([00e408a](https://github.com/lxndrblz/anatole/commit/00e408a786552c0b252081626c162cd5a94622da))
-- typo pull request template ([6583837](https://github.com/lxndrblz/anatole/commit/658383730e7d6c4aa63b6fd679d2dc14e1d6d9e6))
-- use scss variable ([372e0ed](https://github.com/lxndrblz/anatole/commit/372e0ed628a741be0fae47dda6b7ed25e23f50a8))
-- various colors ([8249f80](https://github.com/lxndrblz/anatole/commit/8249f80b595f6d90b3b2239ed8eceb4ac0ac03c9))
-- width smaller than screen on archive page ([ddeacdd](https://github.com/lxndrblz/anatole/commit/ddeacdd16288dab570a165b942c8983cef919393))
+[@alyssais]: https://github.com/alyssais
 
-### Reverts
+### Documentation and Maintenance
 
-- Revert "refactor: do not change link color on hover" ([6594cab](https://github.com/lxndrblz/anatole/commit/6594cabbb4be999a82c769b8ce7633267d26d3b0))
+- Added: docs load mermaid.js by default by [@mattxwang] in [#935]
+- Fixed: table of contents on search docs by [@robinpokorny] in [#940]
+- Fixed: broken docs link (custom footer) by [@olgarithms] in [#951]
+- Fixed: clarify version docs by [@pdmosses] in [#955]
+- Deleted: unused script directory by [@mattxwang] in [#937]
 
-## [1.6.0](https://github.com/lxndrblz/anatole/compare/v1.7.0...v1.8.0) (2022-01-30)
+[#935]: https://github.com/just-the-docs/just-the-docs/pull/935
+[#940]: https://github.com/just-the-docs/just-the-docs/pull/940
+[#951]: https://github.com/just-the-docs/just-the-docs/pull/951
+[#955]: https://github.com/just-the-docs/just-the-docs/pull/955
+[#937]: https://github.com/just-the-docs/just-the-docs/pull/937
+
+### New Contributors
+
+* [@robinpokorny] made their first contribution in [#940]
+* [@olgarithms] made their first contribution in [#951]
+* [@manuelhenke] made their first contribution in [#941]
+* [@JPrevost] made their first contribution in [#950]
+
+[@robinpokorny]: https://github.com/robinpokorny
+[@olgarithms]: https://github.com/olgarithms
+[@manuelhenke]: https://github.com/manuelhenke
+[@JPrevost]: https://github.com/JPrevost
+
+## Pre-release v0.4.0.rc1
+
+### We're back!
+
+Hi all! The Just the Docs team is excited to have our first pre-release in over two years! It is jam-packed with features and bugfixes that have been requested by the community since 2020. They include:
+
+- The new callouts component
+- Allowing pages and collections to coexist on the navigation pane
+- New styling: dark syntax highlighting, support for jekyll-asciidoc, word-wrapping instead of overflow for various elements
+- More customization: external nav links, custom nav footers, favicon includes, search color and placeholder configuration, mermaid.js support, and nav sorting
+- Over 20 bugfixes! Big ones include fixing the `rake` command, using `relative_url`, and search input color
+- More documentation, especially on using custom includes
+- Updating core dependencies to stable Ruby versions
+- A WIP [template repository](https://github.com/just-the-docs/just-the-docs-template) that allows you to setup your own repository using Just the Docs and GitHub Pages with one click - give it a shot! More documentation, etc. is on the way!
+
+We want your feedback! Are these changes helpful? Are our docs easy to understand? Should new features like `mermaid` be opt-in or opt-out? Please [open an issue](https://github.com/just-the-docs/just-the-docs/issues) or [start a discussion](https://github.com/just-the-docs/just-the-docs/discussions) and let us know!
+
+### Trying out pre-release `v0.4.0.rc1`
+
+Due to the massive scope of these changes, we're making `v0.4.0.rc1` avaialble as a **release candidate** for the theme (i.e., a pre-release) with release `v0.4.0` coming soon. We want your help in testing the changes! As of now, the gem on RubyGems and the repository are updated to `v0.4.0.rc1`.
+
+To use this RC explicitly as a remote theme:
+
+```yml
+remote_theme: just-the-docs/just-the-docs@v0.4.0.rc1
+```
+
+To use this RC explicitly as a gem-based theme, pin the version in your `Gemfile` and re-run `bundle install` or `bundle update just-the-docs`:
+
+```ruby
+gem "just-the-docs", "0.4.0.rc1"
+```
+
+### Staying on `v0.3.3`
+
+If you're not ready to make the switch, that's alright! If your version of just-the-docs is pinned to `v0.3.3` (i.e. by a `Gemfile.lock` or in `remote_theme`, then there's nothing you need to do.
+
+If you have not pinned your theme version, you should either:
+
+1. pin your gem version in your `Gemfile`, like so
+```ruby
+gem "just-the-docs", "0.3.3"
+```
+2. freeze the `remote_theme`, like so
+```yml
+remote_theme: just-the-docs/just-the-docs@v0.3.3
+```
+
+{: .warning }
+Use of branches for closed PRs (e.g., [#466], [#578]) is now deprecated, as those branches have been (directly or indirectly) merged, and they may be deleted after the pre-release of `v0.4.0.rc1`.
+
+### Maintenance
+
+Internally, our maintainer team has expanded: [Patrick Marsceill][@pmarsceill], the original maintainer, has stepped down from an active role after almost 4 years! We're very thankful for the work that he's done to create and maintain one of the most popular Jekyll themes. Please join us in giving him thanks!
+
+The new core team currently consists of [@mattxwang], [@pdmosses], [@skullface], [@dougaitken], and [@max06]. Over the past six months, we've been triaging and merging in PRs, as well as contributing our own fixes. We'll continue to address open issues, merge in PRs from the community, and plan out the future of Just the Docs. If you'd like to contribute, now is a great time!
+
+[@mattxwang]: https://github.com/mattxwang
+[@pdmosses]: https://github.com/pdmosses
+[@skullface]: https://github.com/skullface
+[@dougaitken]: https://github.com/dougaitken
+[@max06]: https://github.com/max06
+
+### Roadmap
+
+In the short-term, we're committed to tidying up everything for a `v0.4.0` release. This involves fixing bugs reported from the community in this pre-release, as well as continually merging in minor PRs.
+
+We're also scoping out medium and long-term projects, and want to keep you in the loop. These include:
+
+- upgrading to Jekyll 4, and stopping support for Jekyll 3
+- versioned docs - issue [#728]
+- improved accessibility - issues [#566], [#870]
+- internationalization (i18n) - issue [#59]
+- recursive/multi-level navigation - PR [#462]
+- toggleable dark mode - issue [#234]
+
+as well as DX improvements like better regression tests, CI, and tooling. If you're interested in any of these, please join us [on GitHub](https://github.com/just-the-docs/just-the-docs) - any contribution (raising an issue, writing docs, or submitting a PR) is welcome!
+
+[#728]: https://github.com/just-the-docs/just-the-docs/issues/728
+[#566]: https://github.com/just-the-docs/just-the-docs/issues/566
+[#870]: https://github.com/just-the-docs/just-the-docs/issues/870
+[#59]: https://github.com/just-the-docs/just-the-docs/issues/59
+[#462]: https://github.com/just-the-docs/just-the-docs/pull/462
+[#234]: https://github.com/just-the-docs/just-the-docs/issues/234
 
 ### Features
 
-- added a netlify.toml for demo site ([13bc907](https://github.com/lxndrblz/anatole/commit/13bc90740288e5bc7473f4f1642db4a9bac8bfd3))
-- added links to config and example site in readme ([#293](https://github.com/lxndrblz/anatole/issues/293)) ([9cf84d3](https://github.com/lxndrblz/anatole/commit/9cf84d343061064c203fdecb77558fe54e5b4ea4))
-- added links to demo site ([5294a0d](https://github.com/lxndrblz/anatole/commit/5294a0dfe44d15f0be60385c3db6cd0dded58cf5))
-- Added page title switcher ([#286](https://github.com/lxndrblz/anatole/issues/286)) ([789876a](https://github.com/lxndrblz/anatole/commit/789876a144c58cd4876913ac75c2024c643576a6))
-- Added Plausible Analytics ([#296](https://github.com/lxndrblz/anatole/issues/296)) ([b84efff](https://github.com/lxndrblz/anatole/commit/b84efff11943dc926d5e04892c215d5533dc4bc0))
-- added portfolio and projects page ([#272](https://github.com/lxndrblz/anatole/issues/272)) ([0d412d3](https://github.com/lxndrblz/anatole/commit/0d412d3a37f6317dd1a8b231444077fecbbf522c)), closes [#221](https://github.com/lxndrblz/anatole/issues/221)
-- include testing checklist ([2344d65](https://github.com/lxndrblz/anatole/commit/2344d6572d808468a63642355c072ea95cdd36c6))
-- old content warning ([#266](https://github.com/lxndrblz/anatole/issues/266)) ([33fe67a](https://github.com/lxndrblz/anatole/commit/33fe67a975fce9de03f9666bdbebe647721eb57d))
-- turn anatole theme into a hugo module ([#291](https://github.com/lxndrblz/anatole/issues/291)) ([fcbc65c](https://github.com/lxndrblz/anatole/commit/fcbc65c81ceb7ff31879e997026d79e5215f7b90))
+* Added: Combination by [@pdmosses] in [#578]
+  - Added: dark highlighting in [#463]
+  - Added: pages and collections in [#448]
+  - Added: callouts in [#466]
+  - Fixed: breadcrumb behaviour … by [@AdityaTiwari2102] in [#477]
+  - Fixed: prevent rake command corrupting search data in [#495] (also listed below)
+  - Fixed: nested lists in [#496]
+  - Fixed: set color for search input in [#498] (also listed below)
+  - Fixed: sites with no child pages (no PR)
+  - Fixed: TOC/breadcrumbs for multiple collections in [#494]
+  - Added: collection configuration option `nav_fold` (no PR)
+  - Fixed: indentation and color for folded collection navigation (no PR)
+  - Fixed: scroll navigation to show the link to the current page in [#639]
+  - Fixed: Replace all uses of `absolute_url` by `relative_url`, by [@svrooij] in [#544]
+* Added: custom favicon `_includes` by [@burner1024] in [#364]
+* Added: set color for search input by [@pdmosses] in [#498]
+* Added: search placeholder configuration by [@mattxwang] in [#613]
+* Added: 'child_nav_order' front matter to be able to sort navigation pages in reverse by [@jmertic] in [#726]
+* Added: `nav_footer_custom` include by [@nathanjessen] in [#474]
+* Added: style fixes for jekyll-asciidoc by [@alyssais] in [#829]
+* Added: mermaid.js support by [@nascosto] in [#857]
+* Added: support for external navigation links by [@SPGoding] in [#876]
+* Added: refactor `mermaid` config to use `mermaid_config.js` include, only require `mermaid.version` in `_config.yml` by [@mattxwang] in [#909]
+* Fixed: prepend `site.collections_dir` if exists by [@alexsegura] in [#519]
+* Fixed: nested task lists (#517) by [@pdmosses] in [#855]
+* Fixed: suppress Liquid processing in CSS comments by [@pdmosses] in [#686]
+* Fixed: prevent rake command from corrupting search data by [@pdmosses] in [#495]
+* Fixed: anchor heading links should be visible on focus by [@jacobhq] in [#846]
+* Fixed: add `overflow-x: auto` to `figure.highlight` by [@iridazzle] in [#727]
+* Fixed: add `overflow-wrap: word-break` to `body` by [@iridazzle] in [#889]
+* Fixed: vertical alignment for consecutive labels by [@Eisverygoodletter] in [#893]
+* Fixed: allow links to wrap by [@pdmosses] in [#905]
+* Fixed: nav scroll feature and absolute/relative URLs by [@pdmosses] in [#898]
 
-### Bug Fixes
+[#578]: https://github.com/just-the-docs/just-the-docs/pull/578
+[#463]: https://github.com/just-the-docs/just-the-docs/pull/463
+[#448]: https://github.com/just-the-docs/just-the-docs/pull/448
+[#466]: https://github.com/just-the-docs/just-the-docs/pull/466
+[#477]: https://github.com/just-the-docs/just-the-docs/pull/477
+[#495]: https://github.com/just-the-docs/just-the-docs/pull/495
+[#496]: https://github.com/just-the-docs/just-the-docs/pull/496
+[#498]: https://github.com/just-the-docs/just-the-docs/pull/498
+[#494]: https://github.com/just-the-docs/just-the-docs/pull/494
+[#639]: https://github.com/just-the-docs/just-the-docs/pull/639
+[#544]: https://github.com/just-the-docs/just-the-docs/pull/544
+[#364]: https://github.com/just-the-docs/just-the-docs/pull/364
+[#498]: https://github.com/just-the-docs/just-the-docs/pull/498
+[#613]: https://github.com/just-the-docs/just-the-docs/pull/613
+[#726]: https://github.com/just-the-docs/just-the-docs/pull/726
+[#474]: https://github.com/just-the-docs/just-the-docs/pull/474
+[#829]: https://github.com/just-the-docs/just-the-docs/pull/829
+[#857]: https://github.com/just-the-docs/just-the-docs/pull/857
+[#876]: https://github.com/just-the-docs/just-the-docs/pull/876
+[#909]: https://github.com/just-the-docs/just-the-docs/pull/909
+[#519]: https://github.com/just-the-docs/just-the-docs/pull/519
+[#855]: https://github.com/just-the-docs/just-the-docs/pull/855
+[#686]: https://github.com/just-the-docs/just-the-docs/pull/686
+[#495]: https://github.com/just-the-docs/just-the-docs/pull/495
+[#846]: https://github.com/just-the-docs/just-the-docs/pull/846
+[#727]: https://github.com/just-the-docs/just-the-docs/pull/727
+[#889]: https://github.com/just-the-docs/just-the-docs/pull/889
+[#893]: https://github.com/just-the-docs/just-the-docs/pull/893
+[#905]: https://github.com/just-the-docs/just-the-docs/pull/905
+[#898]: https://github.com/just-the-docs/just-the-docs/pull/898
 
-- added English aria labels for prev/next pagination buttons ([#289](https://github.com/lxndrblz/anatole/issues/289)) ([c610dad](https://github.com/lxndrblz/anatole/commit/c610dadb1769c5ac8d6ec3e760b51931da52a0d7))
-- fixing typos ([99baec2](https://github.com/lxndrblz/anatole/commit/99baec23d388f6693495c90e864629bada902258))
-- image width portfolio ([af75745](https://github.com/lxndrblz/anatole/commit/af75745ecc1e54c93ffa9ebd6dd562f8c621f49c))
-- language dropdown styling ([#264](https://github.com/lxndrblz/anatole/issues/264)) ([e1817fe](https://github.com/lxndrblz/anatole/commit/e1817feceb8f1213f26c8018365e6ba14bb2fd64))
-- make canonical link absolute ([#273](https://github.com/lxndrblz/anatole/issues/273)) ([ef17749](https://github.com/lxndrblz/anatole/commit/ef17749c72806dd54b8d2a660ab8fe41c0aa83bb))
-- order of expiration note ([9dd94c2](https://github.com/lxndrblz/anatole/commit/9dd94c27bfe0239dae54b6ed32289c78ccc4b1a6)), closes [#285](https://github.com/lxndrblz/anatole/issues/285)
-- overlap on ultra wide screens ([#287](https://github.com/lxndrblz/anatole/issues/287)) ([69e2f1f](https://github.com/lxndrblz/anatole/commit/69e2f1f3bba2995bafb311ef439083873fdba92e))
-- redirect users to home page of current language ([#263](https://github.com/lxndrblz/anatole/issues/263)) ([fe9efda](https://github.com/lxndrblz/anatole/commit/fe9efda7969239dfd0f17ef00c0124ea8f68bf99))
-- remove padding in mobile view ([4558d20](https://github.com/lxndrblz/anatole/commit/4558d20053ac0c86ea4402c921a4f7f39a3b89de))
-- revert twitter example for backwards compatibility ([7d2af9a](https://github.com/lxndrblz/anatole/commit/7d2af9ad0b33b840e08d3d6cd430b193508fc6e1)), closes [#271](https://github.com/lxndrblz/anatole/issues/271)
-- show mouseover text for social links ([#265](https://github.com/lxndrblz/anatole/issues/265)) ([d8bfafc](https://github.com/lxndrblz/anatole/commit/d8bfafc28e1741169bc5189553afb6df3deabcfa))
-- twitter shortcode warning ([488c3e9](https://github.com/lxndrblz/anatole/commit/488c3e97ec95c7fdc00102290c8f30f8108d6c8c))
+### Documentation
 
-## [1.4.0](https://github.com/lxndrblz/anatole/compare/v1.7.0...v1.8.0) (2021-11-03)
+* Added: docs on how to break an `ol` by [@pdmosses] in [#856]
+* Added: docs for custom includes by [@nathanjessen] in [#806]
+* Added: document caveat about variable dependencies by [@waldyrious] in [#555]
+* Added: docs on how to use `custom_head` to add a custom favicon by [@UnclassedPenguin] in [#814]
+* Fixed: `ol` on `index.md` by [@pmarsceill] in [#778]
+* Fixed: image link in Markdown kitchen sink by [@JeffGuKang] in [#221]
+* Fixed: images in Markdown kitchen sink by [@dougaitken] in [#782]
+* Fixed: clearer label of link to Jekyll quickstart by [@waldyrious] in [#549]
+* Fixed: remove extra spaces in component docs by [@MichelleBlanchette] in [#554]
+* Fixed: double "your" typo in `index.md` by [@sehilyi] in [#499]
+* Fixed: "you" -> "your" typo in `index.md` by [@nathanjessen] in [#473]
+* Fixed: spacing in toc example by [@henryiii] in [#835]
+* Fixed: typo in `README` on `_config.yml` by [@ivanskodje] in [#891]
+* Fixed: missing code fence in navigation structure docs by [@mattxwang] in [#906]
 
-### Features
+[#856]: https://github.com/just-the-docs/just-the-docs/pull/856
+[#806]: https://github.com/just-the-docs/just-the-docs/pull/806
+[#555]: https://github.com/just-the-docs/just-the-docs/pull/555
+[#814]: https://github.com/just-the-docs/just-the-docs/pull/814
+[#778]: https://github.com/just-the-docs/just-the-docs/pull/778
+[#221]: https://github.com/just-the-docs/just-the-docs/pull/221
+[#782]: https://github.com/just-the-docs/just-the-docs/pull/782
+[#549]: https://github.com/just-the-docs/just-the-docs/pull/549
+[#554]: https://github.com/just-the-docs/just-the-docs/pull/554
+[#499]: https://github.com/just-the-docs/just-the-docs/pull/499
+[#473]: https://github.com/just-the-docs/just-the-docs/pull/473
+[#835]: https://github.com/just-the-docs/just-the-docs/pull/835
+[#891]: https://github.com/just-the-docs/just-the-docs/pull/891
+[#906]: https://github.com/just-the-docs/just-the-docs/pull/906
 
-- Added Formspree spam filtering ([#259](https://github.com/lxndrblz/anatole/issues/259)) ([0c9c5bc](https://github.com/lxndrblz/anatole/commit/0c9c5bc15caa6ebd9d5fa3227aaa62c761956109))
-- Added support for Google Fonts ([#255](https://github.com/lxndrblz/anatole/issues/255)) ([8d51b8b](https://github.com/lxndrblz/anatole/commit/8d51b8ba619af4504ad40386f6b452e50ec8a39b))
-- Improved Arabic support ([#249](https://github.com/lxndrblz/anatole/issues/249)) ([8ad28e8](https://github.com/lxndrblz/anatole/commit/8ad28e87167be8369f7b6ce2737a3cc6f5b9f9e3))
-- improved language dropdown menu ([#261](https://github.com/lxndrblz/anatole/issues/261)) ([045dabb](https://github.com/lxndrblz/anatole/commit/045dabb11992a0d77f404dd931cbb093f4e11b44)), closes [#169](https://github.com/lxndrblz/anatole/issues/169)
-- prettier pagination ([8a40abc](https://github.com/lxndrblz/anatole/commit/8a40abcc71a995b0de12d110428a46ed74a22d3f))
+### Maintenance
 
-### Bug Fixes
+* Added: VScode devcontainer by [@max06] in [#783]
+* Added: `webrick` to `Gemfile` by [@mattxwang] in [#799]
+* Added: 'This site is powered by Netlify.' to the footer by [@mattxwang] in [#797]
+* Updated: new repo path by [@pmarsceill] in [#775]
+* Updated: rename `master` -> `main` by [@pmarsceill] in [#776]
+* Updated: README by [@pmarsceill] in [#777]
+* Updated: Code of Conduct to Contributor Covenant v2.1 by [@mattxwang] in [#790]
+* Updated: CI files, Ruby & Node Versions by [@mattxwang] in [#820]
+* Updated: Stylelint to v14, extend SCSS plugins, remove primer-* configs, resolve issues by [@mattxwang] in [#821]
 
-- adjusted stale bot to close only issues that are awaiting a reply ([2847365](https://github.com/lxndrblz/anatole/commit/284736548ad97e5d84026ff982bca3aa92f5df0d))
-- remove white color in syntax highlighting (dark mode) ([49de81b](https://github.com/lxndrblz/anatole/commit/49de81b2e2c921f752d8b1d261fe4c148a00c51e))
+[#783]: https://github.com/just-the-docs/just-the-docs/pull/783
+[#799]: https://github.com/just-the-docs/just-the-docs/pull/799
+[#797]: https://github.com/just-the-docs/just-the-docs/pull/797
+[#775]: https://github.com/just-the-docs/just-the-docs/pull/775
+[#776]: https://github.com/just-the-docs/just-the-docs/pull/776
+[#777]: https://github.com/just-the-docs/just-the-docs/pull/777
+[#790]: https://github.com/just-the-docs/just-the-docs/pull/790
+[#820]: https://github.com/just-the-docs/just-the-docs/pull/820
+[#821]: https://github.com/just-the-docs/just-the-docs/pull/821
 
-## [1.3.0](https://github.com/lxndrblz/anatole/compare/v1.7.0...v1.8.0) (2021-08-15)
+### Dependencies
 
-### Features
+* Upgrade to GitHub-native Dependabot by @dependabot-preview in [#627]
+* [Security] Bump y18n from 3.2.1 to 3.2.2 by @dependabot-preview in [#606]
+* [Security] Bump hosted-git-info from 2.7.1 to 2.8.9 by @dependabot-preview in [#641]
+* [Security] Bump lodash from 4.17.19 to 4.17.21 by @dependabot-preview in [#640]
+* [Security] Bump ini from 1.3.5 to 1.3.8 by @dependabot-preview in [#511]
+* Bump path-parse from 1.0.6 to 1.0.7 by @dependabot in [#699]
+* Bump ajv from 6.10.0 to 6.12.6 by @dependabot in [#766]
+* Bump prettier from 2.1.2 to 2.5.1 by @dependabot in [#787]
+* Bump prettier from 2.5.1 to 2.6.2 by @dependabot in [#809]
+* Bump prettier from 2.6.2 to 2.7.1 by @dependabot in [#864]
 
-- added schema.org structured data ([3ce92e4](https://github.com/lxndrblz/anatole/commit/3ce92e4534975918a3559ec4f77caf15c797d663))
-- Adding series to the theme ([d530d03](https://github.com/lxndrblz/anatole/commit/d530d03761514d90de059ca005063d447f50460c)), closes [#234](https://github.com/lxndrblz/anatole/issues/234)
+[#627]: https://github.com/just-the-docs/just-the-docs/pull/627
+[#606]: https://github.com/just-the-docs/just-the-docs/pull/606
+[#641]: https://github.com/just-the-docs/just-the-docs/pull/641
+[#640]: https://github.com/just-the-docs/just-the-docs/pull/640
+[#511]: https://github.com/just-the-docs/just-the-docs/pull/511
+[#699]: https://github.com/just-the-docs/just-the-docs/pull/699
+[#766]: https://github.com/just-the-docs/just-the-docs/pull/766
+[#787]: https://github.com/just-the-docs/just-the-docs/pull/787
+[#809]: https://github.com/just-the-docs/just-the-docs/pull/809
+[#864]: https://github.com/just-the-docs/just-the-docs/pull/864
 
-### Bug Fixes
+### New Contributors
 
-- if condition with gtagId ([#230](https://github.com/lxndrblz/anatole/issues/230)) ([9c59364](https://github.com/lxndrblz/anatole/commit/9c59364e45baa0a744e411139d008998da95225e)), closes [#228](https://github.com/lxndrblz/anatole/issues/228)
-- organization name ([96483e4](https://github.com/lxndrblz/anatole/commit/96483e4b5a4f945d7e992c416761496b4ef15e8c))
+* [@AdityaTiwari2102] made their first contribution in [#477]
+* [@svrooij] made their first contribution in [#544]
+* [@alexsegura] made their first contribution in [#519]
+* [@burner1024] made their first contribution in [#364]
+* [@JeffGuKang] made their first contribution in [#221]
+* [@dougaitken] made their first contribution in [#782]
+* [@max06] made their first contribution in [#783]
+* [@sehilyi] made their first contribution in [#499]
+* [@nathanjessen] made their first contribution in [#473]
+* [@waldyrious] made their first contribution in [#549]
+* [@MichelleBlanchette] made their first contribution in [#554]
+* [@henryiii] made their first contribution in [#835]
+* [@jmertic] made their first contribution in [#726]
+* [@jacobhq] made their first contribution in [#846]
+* [@UnclassedPenguin] made their first contribution in [#814]
+* [@alyssais] made their first contribution in [#829]
+* [@nascosto] made their first contribution in [#857]
+* [@SPGoding] made their first contribution in [#876]
+* [@iridazzle] made their first contribution in [#727]
+* [@ivanskodje] made their first contribution in [#891]
+* [@Eisverygoodletter] made their first contribution in [#893]
 
-## [1.2.0](https://github.com/lxndrblz/anatole/compare/v1.7.0...v1.8.0) (2021-07-04)
+[@AdityaTiwari2102]: https://github.com/AdityaTiwari2102
+[@svrooij]: https://github.com/svrooij
+[@alexsegura]: https://github.com/alexsegura
+[@burner1024]: https://github.com/burner1024
+[@JeffGuKang]: https://github.com/JeffGuKang
+[@dougaitken]: https://github.com/dougaitken
+[@max06]: https://github.com/max06
+[@sehilyi]: https://github.com/sehilyi
+[@nathanjessen]: https://github.com/nathanjessen
+[@waldyrious]: https://github.com/waldyrious
+[@MichelleBlanchette]: https://github.com/MichelleBlanchette
+[@henryiii]: https://github.com/henryiii
+[@jmertic]: https://github.com/jmertic
+[@jacobhq]: https://github.com/jacobhq
+[@UnclassedPenguin]: https://github.com/UnclassedPenguin
+[@alyssais]: https://github.com/alyssais
+[@nascosto]: https://github.com/nascosto
+[@SPGoding]: https://github.com/SPGoding
+[@iridazzle]: https://github.com/iridazzle
+[@ivanskodje]: https://github.com/ivanskodje
+[@Eisverygoodletter]: https://github.com/Eisverygoodletter
 
-### Features
+**Full Changelog**: https://github.com/just-the-docs/just-the-docs/compare/v0.3.3...v0.4.0.rc1
 
-- added basic CSS for TOC ([4b11819](https://github.com/lxndrblz/anatole/commit/4b11819a89b7f43f66b13930c7555086459725a4))
-- gitalk comment ([92c37f1](https://github.com/lxndrblz/anatole/commit/92c37f1abcec54941ece965cb047cedda1b2e6a3))
+[@pmarsceill]: https://github.com/pmarsceill
 
-### Bug Fixes
+## v0.3.3
 
-- Adjusted title of single.html to be a H1 header ([0ec60e9](https://github.com/lxndrblz/anatole/commit/0ec60e9678d5f049b687d1b753dd73c1a5107daa))
-- description in README file ([5303fca](https://github.com/lxndrblz/anatole/commit/5303fca371473037c783c6c45d778e5fd8be6bf4))
-- distorted print view ([8c36e9a](https://github.com/lxndrblz/anatole/commit/8c36e9a4a4f411758877742fc59c26fc15880295))
-- missed absolute fontsize ([3184d8f](https://github.com/lxndrblz/anatole/commit/3184d8f808db0a9e912507d537e61aa62ddb2b35))
-- Navigation Item Centering ([#219](https://github.com/lxndrblz/anatole/issues/219)) ([b4260d7](https://github.com/lxndrblz/anatole/commit/b4260d7c7f77d382fe2b98db411fa5f45870ff0b))
-- relative font sizes instead of px defined ([faf23c5](https://github.com/lxndrblz/anatole/commit/faf23c5219a152f99f2854a65348dcc8bc109877))
-- sidebar url ([9b1d6f8](https://github.com/lxndrblz/anatole/commit/9b1d6f8385faabb2e5d3a9c2d70a2b984ad0bf20))
-- updated gitalk tag to include integrity check ([548686a](https://github.com/lxndrblz/anatole/commit/548686af08f78aeda3b237ebe864ee809dda54b3))
+### 🚀 Features
 
-## [1.1.0](https://github.com/lxndrblz/anatole/compare/v1.7.0...v1.8.0) (2021-06-20)
+- Add custom header and footer include files @CodeSandwich (#334)
 
-### Bug Fixes
+### 🐛 Bug Fixes
 
-- correct typo ([3c730ae](https://github.com/lxndrblz/anatole/commit/3c730aeda3f67200fce5fcdaac666192f8cf8323))
+- Limit the effect of `nav_exclude` to the main navigation @pdmosses (#443)
+- Update normalize.scss @pdmosses (#444)
+- Update code.scss @pdmosses (#445)
+- Fix list alignment @pdmosses (#446)
 
-## [1.0.0](https://github.com/lxndrblz/anatole/compare/v1.7.0...v1.8.0) (2021-05-08)
+### 🧰 Maintenance
 
-## [0.9.0](https://github.com/lxndrblz/anatole/compare/v1.7.0...v1.8.0) (2021-04-18)
+- Bump stylelint-config-primer from 9.0.0 to 9.2.1 @dependabot-preview (#451)
+- Bump stylelint from 13.6.1 to 13.7.2 @dependabot-preview (#440)
+- Bump @primer/css from 15.1.0 to 15.2.0 @dependabot-preview (#436)
+- Bump prettier from 2.1.1 to 2.1.2 @dependabot-preview (#429)
 
-### Reverts
+## v0.3.2
 
-- Revert "Fixes an issue where long links overflow page width" ([cbc272f](https://github.com/lxndrblz/anatole/commit/cbc272f46fe78b13e751030a2458f31afbfca213))
+### Changes
 
-## [0.8.0](https://github.com/lxndrblz/anatole/compare/v1.7.0...v1.8.0) (2021-03-13)
+- Safe page sorting @pdmosses (#411)
+- v0.3.2 @pmarsceill (#388)
 
-## [0.7.0](https://github.com/lxndrblz/anatole/compare/v1.7.0...v1.8.0) (2021-03-03)
+### 🚀 Features
 
-### Reverts
+- make font-sizes sass variables so they can be changed @pdebruic (#361)
+- run the site locally inside docker container @fogfish (#398)
+- Feature/doc collections @SgtSilvio (#379)
+- Adjust dl layout @pdmosses (#401)
 
-- Revert "Added reCAPTCHA to Formspree and support for Netlify forms" (#123) ([e325c1b](https://github.com/lxndrblz/anatole/commit/e325c1b2adbddb81c82d167e280ff3f673cf92d6)), closes [#123](https://github.com/lxndrblz/anatole/issues/123)
-- Revert "Added reCAPTCHA to Formspree and support for Netlify forms" ([efabd21](https://github.com/lxndrblz/anatole/commit/efabd21d92afd4d265adf2a490625cc994493656))
-- Revert "Revert "Merge branch 'post-thumbnail' of https://github.com/LucasVadilho/anatole into pr/72"" ([6752fb1](https://github.com/lxndrblz/anatole/commit/6752fb185e4ae9b87d90adaa70c8f81af43cdbdf))
-- Revert "Alternative suggestion" ([1306bb7](https://github.com/lxndrblz/anatole/commit/1306bb71e6e0333c1fd1995c65bb715367694004))
+### 🐛 Bug Fixes
 
-## [0.5.0](https://github.com/lxndrblz/anatole/compare/v1.7.0...v1.8.0) (2021-01-05)
+- Add site.gh_edit_source to "Edit this page on GitHub" link @mrfleap (#418)
+- Inhibit text-transform for code in h4 @pdmosses (#404)
+- Fix native font stack precedence issue on Windows systems. @hvianna (#331)
+- Support for the linenos option on highlighted code @pdmosses (#375)
+- Update anchor_headings.html @pdmosses (#399)
+- Fix https @marksie1988 (#359)
 
-## [0.3.0](https://github.com/lxndrblz/anatole/compare/v1.7.0...v1.8.0) (2020-10-25)
+### 🧰 Maintenance
 
-### Bug Fixes
+- Bump prettier from 2.0.5 to 2.1.1 @dependabot-preview (#427)
+- Bump prettier from 2.0.5 to 2.1.1 @dependabot-preview (#419)
+- [Security] Bump lodash from 4.17.15 to 4.17.19 @dependabot-preview (#389)
+- Bump @primer/css from 14.4.0 to 15.1.0 @dependabot-preview (#402)
+- Bump lodash from 4.17.15 to 4.17.19 @dependabot (#384)
+- Bump @primer/css from 14.4.0 to 15.0.0 @dependabot-preview (#371)
 
-- fix white space in partials template ([a6a072f](https://github.com/lxndrblz/anatole/commit/a6a072f5165ae0aeaff3e381353fcc8d39d78835))
+
+## v0.3.1
+
+### Changes
+
+### 🐛 Bug Fixes
+
+- Improve accessibility by adding label to Anchor links. @mscoutermarsh (#376)
+
+### 🧰 Maintenance
+
+- Remove collapsible TOC on nav doc @pmarsceill (#368)
+- Pdmosses collapsible toc @pmarsceill (#367)
+
+
+## v0.3.0
+
+### Changes
+
+- v0.2.9 @pmarsceill (#306)
+
+### 🚀 Features
+
+- Add print styles @pmarsceill (#362)
+- Navigation improvements and search sections @SgtSilvio (#352)
+
+### 🐛 Bug Fixes
+
+- Remove constraint with jekyll 4.1.0 @PierrickMartos (#348)
+
+### 🧰 Maintenance
+
+- Bump version numbers @pmarsceill (#360)
+- Bump stylelint from 13.3.3 to 13.6.1 @dependabot-preview (#343)
+- Bump stylelint-config-prettier from 8.0.1 to 8.0.2 @dependabot-preview (#349)
+
+
+## v0.2.9
+
+### Bug fixes
+- Horizontal Alignment #103 @pmarsceill
+- Code snippet in headers do not inherit font size #140 @pmarsceill
+- Fix duplicated title and description tags #294 @iefserge
+- Update nav.html for handling nav_exclude #282 @blawqchain
+- Fix duplicate entries in nav.html and default.html #239 @KasparEtter
+- Don't show pages with no title (e.g. redirects in nav) https://github.com/pmarsceill/just-the-docs/pull/295/commits/672de29f2e332a9350af7237e4fb6693c848989e @SgtSilvio
+- [SEARCH RAKE] Fix search generator #319 @RoiArthurB
+
+### Enhancements
+- Improvement/custom themes #186 @SgtSilvio
+- feat: adds "edit this page" and "page last modified" to footer #217 @malsf21
+- feat: adds option to open aux links in new tab #229 @malsf21
+- Default nav order #236 @pdmosses
+- Enable IP anonymization in Google Analytics (GDPR) #250 @r-brown
+
+closes #240 #308 #266 #140 #103
+
+## v0.2.8
+
+### Bugfixes
+- bugfix in search.rake #218 @tiaitsch85
+
+### Dependency and security updates:
+
+- Update jekyll requirement from ~> 3.8.5 to >= 3.8.5, < 4.1.0 #197 @dependabot-preview
+- Update rake requirement from ~> 12.3.1 to >= 12.3.1, < 13.1.0 #227 @dependabot-preview
+- Bump stylelint-config-primer from 8.0.0 to 9.0.0 #247 @dependabot-preview
+- Update bundler requirement from ~> 2.0.1 to ~> 2.1.4 #268 @dependabot-preview
+- Bump @primer/css from 12.7.0 to 14.3.0 #296 @dependabot-preview
+
+### Operations
+
+- Update CI to test multiple versions of Jekyll
+- Update CI to check the rake command that builds the search file
+
+fixes #291 #256 #293 #177
+
+## v0.2.7
+
+### Bugs fixed
+- Anchor headings are now displayed on hover, not only on heading hover
+- Deduplicated anchor heading svg
+- If last page of `site.html_pages` was excluded from search, search json breaks
+- Config variable should be `blanklines` not `blank_lines` for html compression
+- `list-style-none` does not hide bullets on `ul`
+
+### Enhancements
+- Summary for child pages appears in generated TOC
+- Site logo configuration supported replacing title text with image
+- Allow custom CSS overrides (new scss partial at the end of the cascade) separate from variable overrides.
+- Configuration around search strings added to allow search for hyphenated words
+
+### Maintenance
+- Update docs to suggest using index.md as section page filename
+- Bump @primer/css from 12.6.0 to 12.7.0
+- Bump mixin-deep from 1.3.1 to 1.3.2
+- Bump stylelint-config-primer from 7.0.1 to 8.0.0
+
+### PR included
+- #98 by @stefanoborini Introduces the possibility for a summary in the table of contents
+- #141 by @ghabs Fix trailing comma bug in search-data.json
+- #153 by @jacobherrington Change button copy on theme preview
+- #181 by @m3nu Recommend using index.md as parent page for sections
+- #183 by @SgtSilvio Improve heading anchors
+- #187 by @SgtSilvio Improvement/site logo
+- #200 Bump mixin-deep from 1.3.1 to 1.3.2
+- #203 by @pdmosses Search config
+- #205 by @pdmosses Fix blank_lines var to blanklines in config.yml
+- #206 by @iamcarrico Allow for custom overrides by the user
+- #208 Bump @primer/css from 12.6.0 to 12.7.0
+- #213 Bump mixin-deep from 1.3.1 to 1.3.2
+- #214 Bump stylelint-config-primer from 7.0.1 to 8.0.0
+- #215 Bump @primer/css from 12.6.0 to 12.7.0
+
+## v0.2.6
+
+### Bugs fixed
+- Google Analytics tag has been updated #162
+- ~BaseURL has been modified #109~ Reverted -- seems the existing implementation worked
+- Titles can now wrap fixes #106
+
+### Enhancements
+- Search now displays content preview #135
+- Custom footer content added #179
+- Now using GitHub Actions for CI #170
+
+### Maintenance
+- lunrjs upgraded #135
+- Nav generation is optimized #159
+- Stylelint upgrade #143
+- Stylelint config primer upgrade #149
+- Lodash upgrade #160
+
+### PR included
+~#109 by @daviddarnes - Fix baseurl link~ Reverted
+#135 by @SgtSilvio - Upgrades lunr.js, improves search UI, adds heading anchors
+#152 by @yavorg - Improves syntax highlighting for js readablity
+#159 by @julienduchesne - Optimizes nav generation
+#162 by @nergmada - Modifies the google analytics code to match the new tags used by GA
+
+
+## v0.2.5
+
+### Bugs fixed
+
+- Duplicate title tag when Jekyll SEO Plugin gem is used #125 #126
+
+### Enhancements
+
+- Favicon support added #118
+
+### Maintenance
+- Bump stylelint-config-primer from 6.0.0 to 7.0.0  #123
+- Bump @primer/css from 12.2.3 to 12.3.1 #129
+- Add workflow to publish to GPR
+- Fix workflow to publish to Ruby Gems
+
+## v0.2.4
+
+### Bugs
+
+- #102 Remove unnecessary console.log() @JoeNyland
+- #97 Import custom Sass variable overrides before default variables are defined @montchr and @ptvandi
+
+### Additions
+- #117 Add links to docs for setting up GH pages locally @gnarea
+- #95 Add SEO and 'lang' param for `_config` @gebeto
+
+## v0.2.3
+
+### Enhancements
+- Adds ability to use Google Analytics tracking by @pmarsceill
+
+### Bug fixes
+- Fixes 404 error for "/assets/js//search-data.json" by @stephenedmondson
+- Fixes #80 Single quotes in the string were unescaped and ruby attempted variable substitution of amp within it (which failed) by @novelistparty
+- Fixes bug that would only show 2 or more search results (not one) by @ilivewithian
+- Fixes a typo on the layout example by @woernfl
+- Fixes #78 Page scroll position too far down on load by @pmarsceill
+- Fixds ability to nest ul in ol without breaking style or counters
+
+### Dependency updates
+- Bumps stylelint dependency from 9.9.0 to 9.10.1
+
+## v0.2.2
+
+- Bumps stylelint-config-primer to 3.0.1 #44
+- Bumps bundler req to 2.0.1 #61
+- Adds custom 404 page
+- Excludes package-lock.json from jekyll build #47
+- Fixes keyboard scrolling / focus #48
+- Adds ARIA roles to navigation elements
+- Adds support for optional page description metadata (if present in yaml front matter)
+- Addresses some issues with search in #46
+- Option to hide TOC on parent pages if turned off in page's YAML front matter #30
+- Option to suppress an item from being indexed by search if present in page's YAML front matter #32
+
+## v0.2.1
+
+This update fixes security vulnerablities in the lodash sub-dependency and bumps other dev dependencies to their latest version.
+
+## v0.2.0
+
+Adds:
+- Dark mode via `color_scheme` parameter
+- Ability to exclude a page from the main nav with `nav_exclude` parameter closes #21
+- Ability for create children of children pages (3 nav levels) closes #25
+
+Changes:
+- Permalink structure for tiered navigation has been updated
+- Some colors have been updated for consistency / accessibility
+
+## v0.1.6
+
+### Added
+
+- Support for task list styles #19
+- Configuration docs
+- Configuration option to enable / disable search
+- Normalize.scss dependency pulled into project #16 #
+
+### Fixed
+
+- Layout bug in navigation #17
+
+## v0.1.5
+
+Major changes:
+
+- Fixed bug where the rake task would fail when the assets/js directory didn't exist
+
+## v0.1.4
+
+Major changes:
+- Adds Rake as a runtime dependency
+- Definition list styled
+- Sidebar and support cleaned up for smaller screen support
+- Updated some stale docs
+
+## v0.1.3
+
+Major changes:
+- Fix path problems, typos, and general clean-up for OSS.
+
+## v0.1.2
+
+Fix paths when deployed to gh-pages
+
+## v0.1.1
+
+Major updates:
+- Adds search to mobile nav
+- Pulls footer to bottom of the page on mobile (not hidden in nav)
+
+Minor updates:
+- Cleans up h1 typography spacing

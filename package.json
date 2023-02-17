@@ -1,39 +1,20 @@
 {
-  "name": "anatole",
-  "version": "1.12.0",
-  "description": "Anatole is a beautiful minimalist two-column hugo theme based on farbox-theme-Anatole.",
-  "scripts": {
-    "build": "hugo --themesDir=../.. --source=exampleSite && shx rm -rf ./resources && shx cp -r ./exampleSite/resources ./resources && shx echo Done building resources.",
-    "dev": "hugo serve --themesDir=../.. --source=exampleSite",
-    "prettier": "npx prettier --write .",
-    "prepare": "husky install",
-    "release": "release-it",
-    "setup": "npm install && npm run prepare"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lxndrblz/anatole.git"
-  },
-  "keywords": [
-    "theme",
-    "hugo",
-    "farbox",
-    "anatole"
-  ],
-  "author": "Alexander Bilz",
+  "name": "just-the-docs",
+  "version": "0.3.3",
+  "description": "A modern Jekyll theme for documentation",
+  "repository": "just-the-docs/just-the-docs",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/lxndrblz/anatole/issues"
-  },
-  "homepage": "https://github.com/lxndrblz/anatole#readme",
+  "bugs": "https://github.com/just-the-docs/just-the-docs/issues",
   "devDependencies": {
-    "@commitlint/cli": "^16.3.0",
-    "@commitlint/config-conventional": "^16.2.4",
-    "@release-it/conventional-changelog": "^5.1.1",
-    "husky": "^7.0.4",
-    "prettier": "~2.2.1",
-    "prettier-plugin-go-template": "^0.0.13",
-    "release-it": "^15.5.0",
-    "shx": "^0.3.4"
+    "prettier": "^2.8.4",
+    "stylelint": "^14.16.1",
+    "stylelint-config-prettier-scss": "0.0.1",
+    "stylelint-config-standard-scss": "^6.1.0",
+    "stylelint-prettier": "^2.0.0"
+  },
+  "scripts": {
+    "test": "stylelint '**/*.scss'",
+    "format": "prettier --write '**/*.{scss,js,json}'",
+    "stylelint-check": "stylelint-config-prettier-check"
   }
 }
