@@ -119,10 +119,13 @@ GPA 3.60/4.00 | [Transcript](https://drive.google.com/file/d/1xALLspa37JvIsHPieq
 ---
 ### Machine Failure & Credit Card Predictions using Machine Learning
 
-[![Open Presentation1](https://img.shields.io/badge/Google%20Slides%20-Presentation%20(Machine%20Failure)-orange)](https://docs.google.com/presentation/d/1LdOXXjdlF2dYMtwN1gYybLzvjrmSTs7g/edit?usp=share_link&ouid=102297297446553873586&rtpof=true&sd=true)
-[![View on GitHub1](https://img.shields.io/badge/Github-.ipynb%20(Machine%20Failure)-orange)](https://github.com/venufitratama/Machine-Learning-Prediction/blob/master/Machine%20Failure%20Prediction.ipynb)<br>
-[![Open Presentation2](https://img.shields.io/badge/Google%20Slides%20-Presentation%20(Credit%20Card%20Payment)-orange)](https://docs.google.com/presentation/d/11_aVfYqRvZBaWyOR5VzPtvrXegg8-whJ/edit?usp=share_link&ouid=102297297446553873586&rtpof=true&sd=true)
-[![View on GitHub2](https://img.shields.io/badge/Github-.ipynb%20(Credit%20Card%20Payment)-orange)](https://github.com/venufitratama/Machine-Learning-Prediction/blob/master/Credit%20Card%20Payment%20Prediction.ipynb.ipynb)
+![Badge](https://img.shields.io/badge/Machine%20Learning%20-Machine%20Failure-blue)<br>
+[![Open Presentation1](https://img.shields.io/badge/Google%20Slides%20-Presentation-orange)](https://docs.google.com/presentation/d/1LdOXXjdlF2dYMtwN1gYybLzvjrmSTs7g/edit?usp=share_link&ouid=102297297446553873586&rtpof=true&sd=true)
+[![View on GitHub1](https://img.shields.io/badge/Github-.ipynb-orange)](https://github.com/venufitratama/Machine-Learning-Prediction/blob/master/Machine%20Failure%20Prediction.ipynb)<br>
+
+![Badge](https://img.shields.io/badge/Machine%20Learning%20-Credit%20Card%20Payment-blue)<br>
+[![Open Presentation2](https://img.shields.io/badge/Google%20Slides%20-Presentation-orange)](https://docs.google.com/presentation/d/11_aVfYqRvZBaWyOR5VzPtvrXegg8-whJ/edit?usp=share_link&ouid=102297297446553873586&rtpof=true&sd=true)
+[![View on GitHub2](https://img.shields.io/badge/Github-.ipynb-orange)](https://github.com/venufitratama/Machine-Learning-Prediction/blob/master/Credit%20Card%20Payment%20Prediction.ipynb.ipynb)
 
 <div style="text-align: justify">Create a classification model to predict machine failure & default payment next month with the datasets. implementing supervised learning and unsupervised learning, model evaluation, model tuning, and model deployment. Scikit-learn was used as machine learning library. Scikit-learn model used are Logistic Regression, Support Vector Machine, K-Nearest Neighbors, Gaussian Naive Bayes, Random Forest, Adaptive Boost</div>
 <br>
