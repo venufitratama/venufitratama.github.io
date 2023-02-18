@@ -11,7 +11,7 @@
 ### Tanjungpura University
 [Master Degree of Economics and Business](https://pascasarjanafe.untan.ac.id)<br>
 West Borneo, Indonesia | 2022 - 2023<br>
-GPA 3.94/4.00 | [Transcript](https://drive.google.com/file/d/1Tr6bQAVbvyJZx-nVbfiuxeoPcm97NuZ6/view?usp=share_link)
+GPA 3.94/4.00 (A) | [Transcript](https://drive.google.com/file/d/1Tr6bQAVbvyJZx-nVbfiuxeoPcm97NuZ6/view?usp=share_link)
 
 ---
 ### Hacktiv8 Indonesia
@@ -23,7 +23,7 @@ Final Score 86.52/100 (A) | [Transcript](https://drive.google.com/file/d/1ciGNs2
 ### Tanjungpura University
 [Bachelor Degree of Economics and Business](https://feb.untan.ac.id)<br>
 West Borneo, Indonesia | 2016 - 2020<br>
-GPA 3.60/4.00 | [Transcript](https://drive.google.com/file/d/1xALLspa37JvIsHPieqopuR2UE-kLEjR4/view?usp=share_link)
+GPA 3.60/4.00 (A) | [Transcript](https://drive.google.com/file/d/1xALLspa37JvIsHPieqopuR2UE-kLEjR4/view?usp=share_link)
 
 ---
 # Technical Skill
